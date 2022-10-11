@@ -1,5 +1,6 @@
 package c195.task_1.java_c195;
 
+import c195.task_1.java_c195.helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,8 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
+        JDBC.openConnection();
+        JDBC.closeConnection();
         launch();
     }
 }
