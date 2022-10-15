@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="c195.task_1.java_c195.Controller.Appointments"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195.task_1.java_c195.Controller.Appointments">
+   <children>
+      <HBox prefHeight="50.0" prefWidth="800.0">
+         <children>
+            <Label text="Appointment Management Page">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="15.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <TableView layoutX="13.0" layoutY="50.0" prefHeight="350.0" prefWidth="774.0">
+        <columns>
+          <TableColumn prefWidth="39.0" text="ID" />
+          <TableColumn prefWidth="111.0" text="Title" />
+            <TableColumn prefWidth="75.0" text="Type" />
+            <TableColumn prefWidth="117.0" text="Description" />
+            <TableColumn prefWidth="81.0" text="Location" />
+            <TableColumn prefWidth="75.0" text="Start Date" />
+            <TableColumn prefWidth="76.0" text="End Date" />
+            <TableColumn prefWidth="77.0" text="Customer ID" />
+            <TableColumn prefWidth="122.0" text="Contact" />
+        </columns>
+      </TableView>
+      <SplitPane dividerPositions="0.5" layoutX="14.0" layoutY="400.0" prefHeight="140.0" prefWidth="774.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="177.0" prefWidth="383.0">
+               <children>
+                  <Label text="Filter Table By:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox prefHeight="70.0" prefWidth="383.0" AnchorPane.topAnchor="25.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="None">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Week">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Month">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <Label text="Appointment:">
+                     <padding>
+                        <Insets left="5.0" top="50.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutY="67.0" prefHeight="50.0" prefWidth="383.0" AnchorPane.topAnchor="75.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Create">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Update">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Delete" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label text="Navigate:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox layoutY="17.0" prefHeight="50.0" prefWidth="383.0" AnchorPane.topAnchor="25.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Customers">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Reports">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Exit" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
 </AnchorPane>
