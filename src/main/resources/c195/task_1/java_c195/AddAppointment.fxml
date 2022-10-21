@@ -86,7 +86,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField maxWidth="50.0" minWidth="50.0" prefWidth="50.0" GridPane.columnIndex="1" />
+            <TextField disable="true" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" GridPane.columnIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />

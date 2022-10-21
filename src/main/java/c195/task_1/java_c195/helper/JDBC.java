@@ -3,7 +3,6 @@ package c195.task_1.java_c195.helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
 public class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -15,17 +14,21 @@ public class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
-    public static void openConnection()
+    public static Connection openConnection()
     {
         try {
             Class.forName(driver); // Locate Driver
             connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
-            System.out.println("Connection successful!");
         }
         catch(Exception e)
         {
             System.out.println("Error:" + e.getMessage());
         }
+        return connection;
+    }
+
+    public static Connection getCurrentConnection() {
+        return connection;
     }
 
     public static void closeConnection() {
