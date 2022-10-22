@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195.task_1.java_c195.Controller.Appointments">
    <children>
       <HBox prefHeight="50.0" prefWidth="800.0">
@@ -45,25 +44,9 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <HBox prefHeight="70.0" prefWidth="383.0" AnchorPane.topAnchor="25.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="None">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Week">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Month">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                     </children>
-                  </HBox>
+                  <RadioButton mnemonicParsing="false" selected="true" text="None" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+                  <RadioButton mnemonicParsing="false" text="Week" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="25.0" />
+                  <RadioButton mnemonicParsing="false" text="Month" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="25.0" />
                   <Label text="Appointment:">
                      <padding>
                         <Insets left="5.0" top="50.0" />
