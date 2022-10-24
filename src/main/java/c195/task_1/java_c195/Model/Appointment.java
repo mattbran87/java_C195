@@ -1,6 +1,7 @@
 package c195.task_1.java_c195.Model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Appointment {
     private Integer appointmentID;
@@ -8,9 +9,9 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private Timestamp start;
-    private Timestamp end;
-    private Timestamp createDate;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private LocalDateTime createDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
@@ -18,9 +19,9 @@ public class Appointment {
     private Integer userID;
     private Integer contactID;
 
-    public Appointment(int appointmentID, String title, String description, String location, String type,
-                       Timestamp start, Timestamp end, int customerID, int userID, int contactID) {
-        this.appointmentID = appointmentID;
+    public Appointment(int id, String title, String description, String location, String type,
+                       LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID) {
+        this.appointmentID = id;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -52,15 +53,15 @@ public class Appointment {
         return  type;
     }
 
-    public Timestamp getStartDateTime() {
+    public LocalDateTime getStartDateTime() {
         return start;
     }
 
-    public Timestamp getEndDateTime() {
+    public LocalDateTime getEndDateTime() {
         return end;
     }
 
-    public Timestamp getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
