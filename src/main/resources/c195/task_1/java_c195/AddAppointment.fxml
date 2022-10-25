@@ -114,7 +114,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label text="Contact" GridPane.rowIndex="1">
+            <Label text="Contact ID" GridPane.rowIndex="1">
                 <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -75,7 +75,7 @@ public class UpdateAppointment {
         appointment = selectedAppointment;
     }
 
-    public void saveEditAppointment(ActionEvent actionEvent) throws SQLException {
+    public void saveEditAppointment(ActionEvent actionEvent) throws SQLException, IOException {
         int idInput = Integer.parseInt(appointmentID.getText());
         String titleInput = appointmentTitle.getText();
         String DescInput = appointmentDesc.getText();
@@ -107,6 +107,18 @@ public class UpdateAppointment {
         appointment.setContactID(cidInput);
 
         int updateAppointment = upDateAppointment(appointment);
+
+        if (updateAppointment > 0) {
+            Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(parent);
+            stage.setTitle("Appointment Scheduler - Appointments");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error has occurred. Could not update appointment.");
+            alert.showAndWait();
+        }
     }
 
     public void cancelEditAppointment(ActionEvent actionEvent) throws IOException {

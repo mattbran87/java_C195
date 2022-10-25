@@ -142,7 +142,7 @@ public class Appointments {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + title + "?");
             Optional<ButtonType> confirmation = alert.showAndWait();
             if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
-                AppointmentCRUD.deleteAppointment(appointmentID, connection);
+                AppointmentCRUD.deleteAppointment(appointmentID);
                 // reset table
                 ObservableList<Appointment> allAppointmentsList = AppointmentCRUD.getAllAppointments();
                 appointmentsTable.setItems(allAppointmentsList);

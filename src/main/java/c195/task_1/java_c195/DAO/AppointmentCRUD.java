@@ -19,6 +19,9 @@ import java.time.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
+import static c195.task_1.java_c195.helper.Helper.getCurrentFormattedTimeUTC;
+
 public class AppointmentCRUD {
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
@@ -92,9 +95,20 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
-    public static int deleteAppointment(int customer, Connection connection) throws SQLException {
+    public static int generateNewID() throws SQLException {
+        String query = "SELECT MAX(Appointment_ID) AS max_id FROM appointments";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        Integer maxID = 0;
+        if (rs.next()) {
+            maxID = rs.getInt("max_id") + 1;
+        }
+        return maxID;
+    }
+
+    public static int deleteAppointment(int customer) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";
-        PreparedStatement ps = connection.prepareStatement(query);
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
         ps.setInt(1, customer);
         int result = ps.executeUpdate();
         ps.close();
@@ -103,13 +117,6 @@ public class AppointmentCRUD {
 
     public static int addAppointment(Appointment appointment) throws SQLException {
         User user = UserCRUD.getUserByID(appointment.getUserID());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
-        Instant startDateTime = appointment.getStartDateTime().toInstant(ZoneOffset.UTC);
-        Instant endDateTime = appointment.getEndDateTime().toInstant(ZoneOffset.UTC);
-
-        String formattedStart = startDateTime.atOffset(ZoneOffset.UTC).format(formatter);
-        String formattedEnd = endDateTime.atOffset(ZoneOffset.UTC).format(formatter);
 
         try {
             String query = "INSERT INTO appointments (" +
@@ -136,11 +143,11 @@ public class AppointmentCRUD {
             ps.setString(3, appointment.getDescription());
             ps.setString(4, appointment.getLocation());
             ps.setString(5, appointment.getType());
-            ps.setString(6, formattedStart);
-            ps.setString(7, formattedEnd);
-            ps.setString(8, now.format(formatter));
+            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStartDateTime()));
+            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEndDateTime()));
+            ps.setString(8, getCurrentFormattedTimeUTC());
             ps.setString(9, user.getUsername());
-            ps.setString(10, now.format(formatter));
+            ps.setString(10, getCurrentFormattedTimeUTC());
             ps.setString(11, user.getUsername());
             ps.setInt(12, appointment.getCustomerID());
             ps.setInt(13, appointment.getUserID());
@@ -156,16 +163,9 @@ public class AppointmentCRUD {
     }
 
     public static int upDateAppointment(Appointment appointment) throws SQLException {
+        // get user object by user id on appointment
         User user = UserCRUD.getUserByID(appointment.getUserID());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
-        Instant startDateTime = appointment.getStartDateTime().toInstant(ZoneOffset.UTC);
-        Instant endDateTime = appointment.getEndDateTime().toInstant(ZoneOffset.UTC);
 
-        String formattedStart = startDateTime.atOffset(ZoneOffset.UTC).format(formatter);
-        String formattedEnd = endDateTime.atOffset(ZoneOffset.UTC).format(formatter);
-
-        //TODO: complete conversion to UTC.
         try {
             String query = "UPDATE appointments " +
                     "SET Appointment_ID = ?, " +
@@ -189,9 +189,9 @@ public class AppointmentCRUD {
             ps.setString(3, appointment.getDescription());
             ps.setString(4, appointment.getLocation());
             ps.setString(5, appointment.getType());
-            ps.setString(6, formattedStart);
-            ps.setString(7, formattedEnd);
-            ps.setString(8, now.format(formatter));
+            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStartDateTime()));
+            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEndDateTime()));
+            ps.setString(8, getCurrentFormattedTimeUTC());
             ps.setString(9, user.getUsername());
             ps.setInt(10, appointment.getCustomerID());
             ps.setInt(11, appointment.getUserID());
