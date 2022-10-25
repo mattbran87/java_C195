@@ -1,6 +1,7 @@
 package c195.task_1.java_c195.DAO;
 
 
+import c195.task_1.java_c195.Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import c195.task_1.java_c195.helper.JDBC;
@@ -13,7 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AppointmentCRUD {
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
@@ -51,10 +54,12 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
-    public static ObservableList<Appointment> getAppointmentsByDateRange(LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
+    public static ObservableList<Appointment> getAppointmentsByDateRange(String startDate, String endDate) throws SQLException {
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
-        String sql = "SELECT * from appointments WHERE WHERE Start > '" + startDate + "' AND End < '" + endDate +"'";
+        String sql = "SELECT * FROM appointments WHERE Start BETWEEN '"+ startDate + "' AND '" + endDate + "'";
+
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()) {
@@ -90,6 +95,54 @@ public class AppointmentCRUD {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, customer);
+        int result = ps.executeUpdate();
+        ps.close();
+        return result;
+    }
+
+    public static int addAppointment(Appointment appointment) throws SQLException {
+        User user = UserCRUD.getUserByID(appointment.getUserID());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+        Instant startDateTime = appointment.getStartDateTime().toInstant(ZoneOffset.UTC);
+        Instant endDateTime = appointment.getEndDateTime().toInstant(ZoneOffset.UTC);
+
+        String formattedStart = startDateTime.atOffset(ZoneOffset.UTC).format(formatter);
+        String formattedEnd = endDateTime.atOffset(ZoneOffset.UTC).format(formatter);
+
+        String query = "INSERT INTO appointments (" +
+                "Appointment_ID, " +
+                "Title, " +
+                "Description, " +
+                "Location, " +
+                "Type, " +
+                "Start, " +
+                "End, " +
+                "Create_Date, " +
+                "Created_By, " +
+                "Last_Update, " +
+                "Last_Updated_By, " +
+                "Customer_ID, " +
+                "User_ID, " +
+                "Contact_ID" +
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
+
+        ps.setInt(1, appointment.getAppointmentID());
+        ps.setString(2, appointment.getTitle());
+        ps.setString(3, appointment.getDescription());
+        ps.setString(4, appointment.getLocation());
+        ps.setString(5, appointment.getType());
+        ps.setString(6, formattedStart);
+        ps.setString(7, formattedEnd);
+        ps.setString(8, now.format(formatter));
+        ps.setString(9, user.getUsername());
+        ps.setString(10, now.format(formatter));
+        ps.setString(11, user.getUsername());
+        ps.setInt(12, appointment.getCustomerID());
+        ps.setInt(13, appointment.getUserID());
+        ps.setInt(14, appointment.getContactID());
+
         int result = ps.executeUpdate();
         ps.close();
         return result;

@@ -86,16 +86,16 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField disable="true" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxWidth="150.0" minWidth="50.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField maxWidth="150.0" minWidth="50.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField maxWidth="150.0" minWidth="50.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <TextField fx:id="appointmentID" disable="true" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" GridPane.columnIndex="1" />
+            <TextField fx:id="appointmentTitle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="appointmentDesc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="appointmentLoc" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="appointmentType" maxWidth="150.0" minWidth="50.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="appointmentStartDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="appointmentEndDate" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="appointmentStartTime" maxWidth="150.0" minWidth="50.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="appointmentEndTime" maxWidth="150.0" minWidth="50.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="appointmentCustID" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <GridPane layoutX="50.0" layoutY="481.0" prefHeight="105.0" prefWidth="400.0">
@@ -121,19 +121,19 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button mnemonicParsing="false" text="Save">
+                  <Button fx:id="saveAppointment" mnemonicParsing="false" onAction="#saveEditAppointment" text="Save">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="cancelAppointment" mnemonicParsing="false" onAction="#cancelEditAppointment" text="Cancel" />
                </children>
                <GridPane.margin>
                   <Insets top="10.0" />
                </GridPane.margin>
             </HBox>
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="appointmentUID" prefWidth="150.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="appointmentCID" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

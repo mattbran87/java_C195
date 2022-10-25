@@ -111,6 +111,7 @@ public class MainController implements Initializable {
             Parent root = loader.load();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Scene scene = new Scene(root);
+            stage.setTitle("Appointment Scheduler - Appointments");
             stage.setScene(scene);
             stage.show();
 

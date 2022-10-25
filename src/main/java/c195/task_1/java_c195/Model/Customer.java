@@ -10,16 +10,13 @@ public class Customer {
     private String division;
     private String country;
 
-    public Customer(Integer customerID, String name, String address, String postalCode, String phoneNumber,
-                    String division, Integer divisionID, String country) {
+    public Customer(Integer customerID, String name, String address, String postalCode, String phoneNumber, Integer divisionID) {
         this.customerID = customerID;
         this.name = name;
         this.address = address;
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
-        this.division = division;
         this.divisionID = divisionID;
-        this.country = country;
     }
 
     public Integer getCustomerID() {

@@ -16,10 +16,10 @@ import c195.task_1.java_c195.Model.Appointment;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class Appointments {
@@ -50,17 +50,29 @@ public class Appointments {
         // get all appointments
         ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();
         // set columns
-        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
-        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
-        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
-        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
-        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
-        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
-        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
-        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
-        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("userID"));
-        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("contactID"));
-        // set table values
+//        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
+//        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
+//        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
+//        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
+//        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
+//        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
+//        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
+//        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
+//        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("userID"));
+//        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("contactID"));
+//        // set table values
+//        appointmentsTable.setItems(allAppointments);
+
+        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<>("description"));
+        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<>("location"));
+        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<>("type"));
+        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<>("start"));
+        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
+        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         appointmentsTable.setItems(allAppointments);
     }
 
@@ -72,20 +84,21 @@ public class Appointments {
 
     public void radioWeekClicked(ActionEvent actionEvent) throws SQLException {
         // get all appointments
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nowPlus7Days = LocalDateTime.now().plusDays(7);
-        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAppointmentsByDateRange(now, nowPlus7Days);
+
+        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAppointmentsByDateRange(now.format(formatter), nowPlus7Days.format(formatter));
         appointmentsTable.setItems(allAppointments);
     }
 
     public void radioMonthClicked(ActionEvent actionEvent) throws SQLException {
         // get all appointments
-        Date date = new Date();
-        //This method returns the time in millis
-//        long timeMilli = date.getTime();
-        Timestamp now = new Timestamp();
-//        Timestamp nowPlus7Days = Timestamp.valueOf(LocalDateTime.now().plusMonths(1));
-        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAppointmentsByDateRange(now, nowPlus7Days);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nowPlus1Month = LocalDateTime.now().plusMonths(1);
+
+        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAppointmentsByDateRange(now.format(formatter), nowPlus1Month.format(formatter));
         appointmentsTable.setItems(allAppointments);
     }
 
@@ -98,12 +111,23 @@ public class Appointments {
         stage.show();
     }
 
-    public void updateButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(MainApplication.class.getResource("UpdateAppointment.fxml"));
+    public void updateButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
+        Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No appointment selected.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader parent = new FXMLLoader();
+        parent.setLocation(MainApplication.class.getResource("UpdateAppointment.fxml"));
+        Parent scene = parent.load();
+        UpdateAppointment controller = parent.getController();
+        controller.passAppointmentData(selectedAppointment);
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setTitle("Appointment Scheduler - Add Appointment");
-        stage.setScene(scene);
+        stage.setTitle("Appointment Scheduler - Update Appointment");
+        stage.setScene(new Scene(scene));
         stage.show();
     }
 
