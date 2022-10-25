@@ -22,7 +22,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
-import static c195.task_1.java_c195.DAO.AppointmentCRUD.addAppointment;
+import static c195.task_1.java_c195.DAO.AppointmentCRUD.upDateAppointment;
 
 public class UpdateAppointment {
     public TextField appointmentID;
@@ -106,7 +106,7 @@ public class UpdateAppointment {
         appointment.setUserID(uidInput);
         appointment.setContactID(cidInput);
 
-        int updateAppointment = addAppointment(appointment);
+        int updateAppointment = upDateAppointment(appointment);
     }
 
     public void cancelEditAppointment(ActionEvent actionEvent) throws IOException {
