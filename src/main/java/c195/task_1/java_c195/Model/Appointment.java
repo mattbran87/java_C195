@@ -63,16 +63,16 @@ public class Appointment {
     public String getType() {
         return  type;
     }
-    public void setStartDateTime(LocalDateTime start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
-    public LocalDateTime getStartDateTime() {
+    public LocalDateTime getStart() {
         return start;
     }
-    public void setEndDateTime(LocalDateTime end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-    public LocalDateTime getEndDateTime() {
+    public LocalDateTime getEnd() {
         return end;
     }
     public void setCreateDate(LocalDateTime createDate) {

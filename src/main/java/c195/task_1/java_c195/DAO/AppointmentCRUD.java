@@ -7,17 +7,10 @@ import javafx.collections.ObservableList;
 import c195.task_1.java_c195.helper.JDBC;
 import c195.task_1.java_c195.Model.Appointment;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
 import static c195.task_1.java_c195.helper.Helper.getCurrentFormattedTimeUTC;
@@ -95,6 +88,43 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
+    public static ObservableList<Appointment> getAllCustomerAppointments(int customersID) throws SQLException {
+        ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * from appointments WHERE Customer_ID=?";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+
+        ps.setInt(1, customersID);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            int id = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            int customerID = rs.getInt("Customer_ID");
+            int userID = rs.getInt("User_ID");
+            int contactID = rs.getInt("Contact_ID");
+            Appointment appointment = new Appointment(
+                    id,
+                    title,
+                    description,
+                    location,
+                    type,
+                    start,
+                    end,
+                    customerID,
+                    userID,
+                    contactID
+            );
+            appointmentsObservableList.add(appointment);
+        }
+
+        return appointmentsObservableList;
+    }
+
     public static int generateNewID() throws SQLException {
         String query = "SELECT MAX(Appointment_ID) AS max_id FROM appointments";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -106,10 +136,10 @@ public class AppointmentCRUD {
         return maxID;
     }
 
-    public static int deleteAppointment(int customer) throws SQLException {
+    public static int deleteAppointment(int appointmentID) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
-        ps.setInt(1, customer);
+        ps.setInt(1, appointmentID);
         int result = ps.executeUpdate();
         ps.close();
         return result;
@@ -143,8 +173,8 @@ public class AppointmentCRUD {
             ps.setString(3, appointment.getDescription());
             ps.setString(4, appointment.getLocation());
             ps.setString(5, appointment.getType());
-            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStartDateTime()));
-            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEndDateTime()));
+            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStart()));
+            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEnd()));
             ps.setString(8, getCurrentFormattedTimeUTC());
             ps.setString(9, user.getUsername());
             ps.setString(10, getCurrentFormattedTimeUTC());
@@ -189,8 +219,8 @@ public class AppointmentCRUD {
             ps.setString(3, appointment.getDescription());
             ps.setString(4, appointment.getLocation());
             ps.setString(5, appointment.getType());
-            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStartDateTime()));
-            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEndDateTime()));
+            ps.setString(6, convertLocalDateTimeToUTC(appointment.getStart()));
+            ps.setString(7, convertLocalDateTimeToUTC(appointment.getEnd()));
             ps.setString(8, getCurrentFormattedTimeUTC());
             ps.setString(9, user.getUsername());
             ps.setInt(10, appointment.getCustomerID());

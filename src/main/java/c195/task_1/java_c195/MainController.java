@@ -117,7 +117,7 @@ public class MainController implements Initializable {
 
             //check for upcoming appointments if user is validated
             for (Appointment appointment : getAllAppointments) {
-                startTime = appointment.getStartDateTime();
+                startTime = appointment.getStart();
 
                 if (startTime.isEqual(now) ||
                     startTime.isAfter(now) && startTime.isBefore(nowPlus15)) {

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -50,29 +51,17 @@ public class Appointments {
         // get all appointments
         ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();
         // set columns
-//        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
-//        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
-//        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
-//        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
-//        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
-//        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
-//        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
-//        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
-//        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("userID"));
-//        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("contactID"));
-//        // set table values
-//        appointmentsTable.setItems(allAppointments);
-
-        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<>("description"));
-        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<>("location"));
-        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<>("start"));
-        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
-        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        appointmentsTableID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
+        appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
+        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
+        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
+        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
+        appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
+        appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
+        appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
+        appointmentsTableUID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("userID"));
+        appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("contactID"));
+        // set table values
         appointmentsTable.setItems(allAppointments);
     }
 
@@ -133,8 +122,6 @@ public class Appointments {
 
     public void deleteButtonClicked(ActionEvent actionEvent) {
         try {
-            // connect to db
-            Connection connection = JDBC.openConnection();
             // get appointment values
             int appointmentID = appointmentsTable.getSelectionModel().getSelectedItem().getAppointmentID();
             String title = appointmentsTable.getSelectionModel().getSelectedItem().getTitle();
@@ -153,10 +140,10 @@ public class Appointments {
     }
 
     public void customersButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(MainApplication.class.getResource("AddCustomer.fxml"));
+        Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
-        stage.setTitle("Appointment Scheduler - Add Appointment");
+        stage.setTitle("Appointment Scheduler - Customers");
         stage.setScene(scene);
         stage.show();
     }
@@ -165,7 +152,7 @@ public class Appointments {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Reports.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
-        stage.setTitle("Appointment Scheduler - Add Appointment");
+        stage.setTitle("Appointment Scheduler - Reports");
         stage.setScene(scene);
         stage.show();
     }

@@ -19,15 +19,15 @@
                 </Label>
             </children>
         </HBox>
-        <TableView layoutX="13.0" layoutY="50.0" prefHeight="350.0" prefWidth="774.0">
+        <TableView fx:id="customerTable" layoutX="13.0" layoutY="50.0" prefHeight="350.0" prefWidth="774.0">
             <columns>
-                <TableColumn prefWidth="39.0" text="ID" />
-                <TableColumn prefWidth="136.0" text="Customer Name" />
-                <TableColumn prefWidth="81.0" text="Division" />
-                <TableColumn prefWidth="261.0" text="Address" />
-                <TableColumn prefWidth="71.0" text="Zip Code" />
-                <TableColumn prefWidth="76.0" text="Country" />
-                <TableColumn prefWidth="109.0" text="Phone Number" />
+                <TableColumn fx:id="customerTableID" prefWidth="39.0" text="ID" />
+                <TableColumn fx:id="customerTableName" prefWidth="136.0" text="Customer Name" />
+                <TableColumn fx:id="customerTableDiv" prefWidth="81.0" text="Division" />
+                <TableColumn fx:id="customerTableAddr" prefWidth="261.0" text="Address" />
+                <TableColumn fx:id="customerTableZip" prefWidth="71.0" text="Zip Code" />
+                <TableColumn fx:id="customerTableCtry" prefWidth="76.0" text="Country" />
+                <TableColumn fx:id="customerTablePhone" prefWidth="109.0" text="Phone Number" />
             </columns>
         </TableView>
         <SplitPane dividerPositions="0.5" layoutX="14.0" layoutY="400.0" prefHeight="140.0" prefWidth="774.0">
@@ -44,17 +44,17 @@
                         </Label>
                         <HBox layoutY="67.0" prefHeight="50.0" prefWidth="383.0" AnchorPane.topAnchor="25.0">
                             <children>
-                                <Button mnemonicParsing="false" text="Create">
+                                <Button fx:id="customerCreate" mnemonicParsing="false" onAction="#createButtonClicked" text="Create">
                                     <HBox.margin>
                                         <Insets left="20.0" right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" text="Update">
+                                <Button fx:id="customerUpdate" mnemonicParsing="false" onAction="#updateButtonClicked" text="Update">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" text="Delete" />
+                                <Button fx:id="customerDelete" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Delete" />
                             </children>
                         </HBox>
                     </children>
@@ -71,17 +71,17 @@
                         </Label>
                         <HBox layoutY="17.0" prefHeight="50.0" prefWidth="383.0" AnchorPane.topAnchor="25.0">
                             <children>
-                                <Button mnemonicParsing="false" text="Appointments">
+                                <Button fx:id="apptButton" mnemonicParsing="false" onAction="#apptButtonClicked" text="Appointments">
                                     <HBox.margin>
                                         <Insets left="20.0" right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" text="Reports">
+                                <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#reportsButtonClicked" text="Reports">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" text="Exit" />
+                                <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitButtonClicked" text="Exit" />
                             </children>
                         </HBox>
                     </children>

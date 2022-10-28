@@ -50,4 +50,36 @@ public class Customer {
     public Integer getDivisionID() {
         return divisionID;
     }
+
+    public void setCustomerID(Integer customerID) {
+        this.customerID = customerID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDivisionID(Integer divisionID) {
+        this.divisionID = divisionID;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

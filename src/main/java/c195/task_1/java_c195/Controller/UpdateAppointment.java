@@ -43,8 +43,8 @@ public class UpdateAppointment {
     public Appointment appointment;
 
     public void passAppointmentData(Appointment selectedAppointment) throws SQLException {
-        ZonedDateTime startDateTimeUTC = selectedAppointment.getStartDateTime().toInstant(OffsetDateTime.now().getOffset()).atZone(ZoneOffset.UTC);
-        ZonedDateTime endDateTimeUTC = selectedAppointment.getEndDateTime().toInstant(OffsetDateTime.now().getOffset()).atZone(ZoneOffset.UTC);
+        ZonedDateTime startDateTimeUTC = selectedAppointment.getStart().toInstant(OffsetDateTime.now().getOffset()).atZone(ZoneOffset.UTC);
+        ZonedDateTime endDateTimeUTC = selectedAppointment.getEnd().toInstant(OffsetDateTime.now().getOffset()).atZone(ZoneOffset.UTC);
 
         ZonedDateTime localStartDateTime = startDateTimeUTC.withZoneSameInstant(TimeZone.getDefault().toZoneId());
         ZonedDateTime localEndDateTime = endDateTimeUTC.withZoneSameInstant(TimeZone.getDefault().toZoneId());
@@ -58,8 +58,8 @@ public class UpdateAppointment {
         appointmentDesc.setText(selectedAppointment.getDescription());
         appointmentLoc.setText(selectedAppointment.getLocation());
         appointmentType.setText(selectedAppointment.getType());
-        appointmentStartDate.setValue(selectedAppointment.getStartDateTime().toLocalDate());
-        appointmentEndDate.setValue(selectedAppointment.getEndDateTime().toLocalDate());
+        appointmentStartDate.setValue(selectedAppointment.getStart().toLocalDate());
+        appointmentEndDate.setValue(selectedAppointment.getEnd().toLocalDate());
         appointmentStartTime.setText(startTimeString);
         appointmentEndTime.setText(endTimeString);
 
@@ -100,8 +100,8 @@ public class UpdateAppointment {
         appointment.setDescription(DescInput);
         appointment.setLocation(locInput);
         appointment.setType(typeInput);
-        appointment.setStartDateTime(newStartDateTime);
-        appointment.setEndDateTime(newEndDateTime);
+        appointment.setStart(newStartDateTime);
+        appointment.setEnd(newEndDateTime);
         appointment.setCustomerID(custIDInput);
         appointment.setUserID(uidInput);
         appointment.setContactID(cidInput);
