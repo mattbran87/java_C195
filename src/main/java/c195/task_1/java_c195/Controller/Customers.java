@@ -132,6 +132,10 @@ public class Customers {
     }
 
     public void exitButtonClicked(ActionEvent actionEvent) {
-        System.exit(0);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Would you like to exit the program?");
+        Optional<ButtonType> confirmation = alert.showAndWait();
+        if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 }
