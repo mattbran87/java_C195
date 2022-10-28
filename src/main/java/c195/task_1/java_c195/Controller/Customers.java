@@ -1,10 +1,14 @@
 package c195.task_1.java_c195.Controller;
 
 import c195.task_1.java_c195.DAO.AppointmentCRUD;
+import c195.task_1.java_c195.DAO.CountryCRUD;
 import c195.task_1.java_c195.DAO.CustomerCRUD;
+import c195.task_1.java_c195.DAO.FirstLevelDivisionCRUD;
 import c195.task_1.java_c195.MainApplication;
 import c195.task_1.java_c195.Model.Appointment;
+import c195.task_1.java_c195.Model.Country;
 import c195.task_1.java_c195.Model.Customer;
+import c195.task_1.java_c195.Model.FirstLevelDivision;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -37,12 +41,20 @@ public class Customers {
 
     public void initialize() throws SQLException {
         ObservableList<Customer> allCustomers = CustomerCRUD.getAllCustomers();
-        customerTableID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        customerTableDiv.setCellValueFactory(new PropertyValueFactory<>("address"));
-        customerTableAddr.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        customerTableZip.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        customerTableCtry.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
+        for (Customer customer : allCustomers) {
+            FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionID(customer.getDivisionID());
+            Country country = CountryCRUD.getCountryByID(firstLevelDivision.getCountryID());
+
+            customer.setCountry(country.getCountryName());
+            customer.setDivision(firstLevelDivision.getDivisionName());
+        }
+        customerTableID.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerID"));
+        customerTableName.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));
+        customerTableDiv.setCellValueFactory(new PropertyValueFactory<Customer, String>("division"));
+        customerTableAddr.setCellValueFactory(new PropertyValueFactory<Customer, String>("address"));
+        customerTableZip.setCellValueFactory(new PropertyValueFactory<Customer, String>("postalCode"));
+        customerTableCtry.setCellValueFactory(new PropertyValueFactory<Customer, String>("country"));
+        customerTablePhone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("phoneNumber"));
         customerTable.setItems(allCustomers);
     }
     public void createButtonClicked(ActionEvent actionEvent) throws IOException {

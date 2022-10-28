@@ -62,7 +62,7 @@
                         <Insets top="10.0" />
                     </GridPane.margin>
                 </HBox>
-                <ComboBox fx:id="country" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ComboBox fx:id="country" onAction="#onSelectionChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <ComboBox fx:id="division" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label layoutX="10.0" layoutY="97.0" text="Customer Name" GridPane.rowIndex="3">
                     <font>

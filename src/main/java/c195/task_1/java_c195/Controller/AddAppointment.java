@@ -45,7 +45,7 @@ public class AddAppointment {
         appointmentID.setText(String.valueOf(generateNewID()));
         appointmentCustID.setItems(CustomerCRUD.getAllCustomerIDs());
         appointmentUID.setItems(UserCRUD.getAllUserIDs());
-        appointmentCID.setItems(ContactCRUD.getAllContactsByID());
+        appointmentCID.setItems(ContactCRUD.getAllContactIDs());
     }
 
     public void saveEditAppointment(ActionEvent actionEvent) throws SQLException, IOException {

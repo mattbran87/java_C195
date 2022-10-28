@@ -1,5 +1,7 @@
 package c195.task_1.java_c195.Controller;
 
+import c195.task_1.java_c195.Model.Country;
+import c195.task_1.java_c195.Model.FirstLevelDivision;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,9 +37,9 @@ public class AddCustomer {
 
     public void initialize() throws SQLException {
         // set id field on page load
-        customerID.setText(String.valueOf(generateNewID()));
-        country.setItems(CountryCRUD.getAllCountries());
-        division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisions());
+        customerID.setText(String.valueOf(CustomerCRUD.generateNewID()));
+        country.setItems(CountryCRUD.getAllCountryNames());
+//        division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisions());
     }
 
     public void saveBUttonClicked(ActionEvent actionEvent) throws SQLException, IOException {
@@ -49,7 +51,9 @@ public class AddCustomer {
             alert.showAndWait();
             return;
         } else {
-            countryInput = Integer.parseInt(country.getValue().toString());
+            String countryValue = country.getValue().toString();
+            Country country = CountryCRUD.getCountryByName(countryValue);
+            countryInput = country.getCountryID();
         }
 
         int divisionInput = 0;
@@ -58,7 +62,9 @@ public class AddCustomer {
             alert.showAndWait();
             return;
         } else {
-            divisionInput = Integer.parseInt(division.getValue().toString());
+            String divisionValue = division.getValue().toString();
+            FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionName(divisionValue);
+            divisionInput = firstLevelDivision.getDivisionID();
         }
 
         String customerNameInput = "";
@@ -122,11 +128,22 @@ public class AddCustomer {
     }
 
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
+        Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setTitle("Appointment Scheduler - Customers");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onSelectionChange(ActionEvent actionEvent) throws SQLException {
+        if (country.getValue() != null) {
+            String countryValue = country.getValue().toString();
+            Country country = CountryCRUD.getCountryByName(countryValue);
+            int countryID = country.getCountryID();
+            division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisionNamesByCountryID(countryID));
+        } else {
+            return;
+        }
     }
 }

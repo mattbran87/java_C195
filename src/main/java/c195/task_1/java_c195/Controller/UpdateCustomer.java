@@ -1,8 +1,12 @@
 package c195.task_1.java_c195.Controller;
 
 
+import c195.task_1.java_c195.DAO.CountryCRUD;
 import c195.task_1.java_c195.DAO.CustomerCRUD;
+import c195.task_1.java_c195.DAO.FirstLevelDivisionCRUD;
 import c195.task_1.java_c195.DAO.UserCRUD;
+import c195.task_1.java_c195.Model.Country;
+import c195.task_1.java_c195.Model.FirstLevelDivision;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,14 +46,14 @@ public class UpdateCustomer {
         zipcode.setText(selectedCustomer.getPostalCode());
         phoneNumber.setText(selectedCustomer.getPhoneNumber());
 
-        // need to finish dynamic loading of dropdowns to both update and add forms
-        // 
+        FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionID(selectedCustomer.getDivisionID());
+        Country countryObject = CountryCRUD.getCountryByID(firstLevelDivision.getCountryID());
 
-        country.setItems(CustomerCRUD.getAllCustomerIDs());
-        country.getSelectionModel().select(selectedCustomer.getCountry());
+        country.setItems(CountryCRUD.getAllCountryNames());
+        country.getSelectionModel().select(countryObject.getCountryName());
 
-        division.setItems(UserCRUD.getAllUserIDs());
-        division.getSelectionModel().select(selectedCustomer.getDivision());
+        division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisionNamesByCountryID(countryObject.getCountryID()));
+        division.getSelectionModel().select(firstLevelDivision.getDivisionName());
 
         customer = selectedCustomer;
     }
@@ -63,7 +67,9 @@ public class UpdateCustomer {
             alert.showAndWait();
             return;
         } else {
-            countryInput = Integer.parseInt(country.getValue().toString());
+            String countryValue = country.getValue().toString();
+            Country country = CountryCRUD.getCountryByName(countryValue);
+            countryInput = country.getCountryID();
         }
 
         int divisionInput = 0;
@@ -72,7 +78,9 @@ public class UpdateCustomer {
             alert.showAndWait();
             return;
         } else {
-            divisionInput = Integer.parseInt(division.getValue().toString());
+            String divisionValue = division.getValue().toString();
+            FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionName(divisionValue);
+            divisionInput = firstLevelDivision.getDivisionID();
         }
 
         String customerNameInput = "";
@@ -136,11 +144,22 @@ public class UpdateCustomer {
     }
 
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
+        Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setTitle("Appointment Scheduler - Customers");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onSelectionChanged(ActionEvent actionEvent) throws SQLException {
+        if (country.getValue() != null) {
+            String countryValue = country.getValue().toString();
+            Country country = CountryCRUD.getCountryByName(countryValue);
+            int countryID = country.getCountryID();
+            division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisionNamesByCountryID(countryID));
+        } else {
+            return;
+        }
     }
 }

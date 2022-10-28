@@ -33,7 +33,7 @@ public class ContactCRUD {
         return contactsObservableList;
     }
 
-    public static ObservableList<Integer> getAllContactsByID() throws SQLException {
+    public static ObservableList<Integer> getAllContactIDs() throws SQLException {
         ObservableList<Integer> contactsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT Contact_ID from contacts";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);

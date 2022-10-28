@@ -33,46 +33,57 @@ public class FirstLevelDivisionCRUD {
         return firstLevelDomainObservableList;
     }
 
-    public static ObservableList<FirstLevelDivision> getAllFirstLevelDivisionsByDivisionID(int divisionID) throws SQLException {
-        ObservableList<FirstLevelDivision> firstLevelDomainObservableList = FXCollections.observableArrayList();
+    public static FirstLevelDivision getFirstLevelDivisionByDivisionID(int divisionID) throws SQLException {
         String sql = "SELECT * from first_level_divisions WHERE Division_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
         ps.setInt(1, divisionID);
         ResultSet rs = ps.executeQuery();
+        FirstLevelDivision firstLevelDivision = null;
 
         while(rs.next()) {
             int id = rs.getInt("Division_ID");
             String division = rs.getString("Division");
             int countryID = rs.getInt("Country_ID");
-            FirstLevelDivision firstLevelDivision = new FirstLevelDivision(
+            firstLevelDivision = new FirstLevelDivision(
                     id,
                     division,
                     countryID
             );
-
-            firstLevelDomainObservableList.add(firstLevelDivision);
         }
-        return firstLevelDomainObservableList;
+        return firstLevelDivision;
     }
 
-    public static ObservableList<FirstLevelDivision> getAllFirstLevelDivisionsByCountryID(int ctryID) throws SQLException {
-        ObservableList<FirstLevelDivision> firstLevelDomainObservableList = FXCollections.observableArrayList();
+    public static FirstLevelDivision getFirstLevelDivisionByDivisionName(String divisionName) throws SQLException {
+        String sql = "SELECT * from first_level_divisions WHERE Division=?";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ps.setString(1, divisionName);
+        ResultSet rs = ps.executeQuery();
+        FirstLevelDivision firstLevelDivision = null;
+
+        while(rs.next()) {
+            int id = rs.getInt("Division_ID");
+            String division = rs.getString("Division");
+            int countryID = rs.getInt("Country_ID");
+            firstLevelDivision = new FirstLevelDivision(
+                    id,
+                    division,
+                    countryID
+            );
+        }
+        return firstLevelDivision;
+    }
+
+    public static ObservableList<String> getAllFirstLevelDivisionNamesByCountryID(int ctryID) throws SQLException {
+        ObservableList<String> firstLevelDomainObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from first_level_divisions WHERE Country_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
         ps.setInt(1, ctryID);
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()) {
-            int id = rs.getInt("Division_ID");
             String division = rs.getString("Division");
-            int countryID = rs.getInt("Country_ID");
-            FirstLevelDivision firstLevelDivision = new FirstLevelDivision(
-                    id,
-                    division,
-                    countryID
-            );
 
-            firstLevelDomainObservableList.add(firstLevelDivision);
+            firstLevelDomainObservableList.add(division);
         }
         return firstLevelDomainObservableList;
     }

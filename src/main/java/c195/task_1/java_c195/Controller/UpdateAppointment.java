@@ -69,7 +69,7 @@ public class UpdateAppointment {
         appointmentUID.setItems(UserCRUD.getAllUserIDs());
         appointmentUID.getSelectionModel().select(selectedAppointment.getUserID());
 
-        appointmentCID.setItems(ContactCRUD.getAllContactsByID());
+        appointmentCID.setItems(ContactCRUD.getAllContactIDs());
         appointmentCID.getSelectionModel().select(selectedAppointment.getContactID());
 
         appointment = selectedAppointment;

@@ -105,12 +105,12 @@ public class CustomerCRUD {
     public static int addCustomer(Customer customer) throws SQLException {
         try {
             String query = "INSERT INTO customers (" +
-                    "customerID, " +
-                    "name, " +
-                    "address, " +
-                    "postalCode, " +
-                    "phoneNumber, " +
-                    "divisionID" +
+                    "Customer_ID, " +
+                    "Customer_Name, " +
+                    "Address, " +
+                    "Postal_Code, " +
+                    "Phone, " +
+                    "Division_ID" +
                     ") VALUES (?,?,?,?,?,?)";
 
             PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -134,13 +134,13 @@ public class CustomerCRUD {
     public static int updateCustomer(Customer customer) throws SQLException {
         try {
             String query = "UPDATE customers " +
-                    "SET customerID = ?, " +
-                    "name, " +
-                    "address, " +
-                    "postalCode, " +
-                    "phoneNumber, " +
-                    "divisionID" +
-                    "WHERE customerID = ?";
+                    "SET Customer_ID = ?, " +
+                    "Customer_Name = ?, " +
+                    "Address = ?, " +
+                    "Postal_Code = ?, " +
+                    "Phone = ?, " +
+                    "Division_ID = ? " +
+                    "WHERE Customer_ID = ?";
 
             PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
 
