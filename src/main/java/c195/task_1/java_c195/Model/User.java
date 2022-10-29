@@ -11,14 +11,26 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * @description get the user id
+     * @return userID
+     */
     public int getUserID() {
         return userID;
     }
 
+    /**
+     * @description get the username
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @description get password
+     * @return password
+     */
     public String getPassword() {
         return password;
     }

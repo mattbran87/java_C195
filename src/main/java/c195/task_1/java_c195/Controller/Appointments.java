@@ -53,9 +53,9 @@ public class Appointments {
         // set columns
         appointmentsTableID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
         appointmentsTableTitle.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
-        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
-        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
-        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
+        appointmentsTableType.setCellValueFactory(new PropertyValueFactory<Appointment, String>("type"));
+        appointmentsTableDesc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("description"));
+        appointmentsTableLoc.setCellValueFactory(new PropertyValueFactory<Appointment, String>("location"));
         appointmentsTableStart.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start"));
         appointmentsTableEnd.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
         appointmentsTableCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));

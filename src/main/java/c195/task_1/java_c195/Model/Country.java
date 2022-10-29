@@ -9,10 +9,18 @@ public class Country {
         this.country = country;
     }
 
+    /**
+     * @description get the country ID
+     * @return countryID
+     */
     public int getCountryID() {
         return countryID;
     }
 
+    /**
+     * @description get the country name
+     * @return country
+     */
     public String getCountryName() {
         return country;
     }

@@ -21,9 +21,17 @@
       </HBox>
       <TabPane layoutX="12.0" layoutY="50.0" prefHeight="275.0" prefWidth="577.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="apptByType" onSelectionChanged="#apptByTypeSelected" text="Appointments By Type">
+          <Tab fx:id="apptByType" onSelectionChanged="#apptByTypeSelected" text="Appointments By Type &amp; Month">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="8.0" layoutY="8.0" prefHeight="230.0" prefWidth="561.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab fx:id="contactSched" onSelectionChanged="#contactSchedSelected" text="Contact Schedule">

@@ -11,14 +11,26 @@ public class Contact {
         this.email = email;
     }
 
+    /**
+     * @description
+     * @return contactID
+     */
     public int getContactID() {
         return contactID;
     }
 
+    /**
+     * @description
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @description
+     * @return email
+     */
     public String getEmail() {
         return email;
     }

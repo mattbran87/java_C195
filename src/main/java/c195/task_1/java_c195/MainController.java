@@ -48,8 +48,11 @@ public class MainController implements Initializable {
     @FXML
     public Button exitButton;
 
-    private static final String FILENAME = "language_files/login";
-
+    /**
+     * @description When page is initially loaded translate input labels. Defaults to US English
+     * @param url URL of the current page
+     * @param rb gets the language resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -64,7 +67,7 @@ public class MainController implements Initializable {
             usernameLabel.setText(rb.getString("usernameLabel"));
             passwordLabel.setText(rb.getString("passwordLabel"));
             locationLabel.setText(rb.getString("locationLabel"));
-            locationValue.setText(rb.getString("locationValue"));
+            locationValue.setText(locale.getCountry());
             loginButton.setText(rb.getString("loginButton"));
             exitButton.setText(rb.getString("exitButton"));
 
@@ -76,6 +79,12 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * @description When login button is clicked the user is logged into the system unless incorrect username and password is given
+     * @param mouseEvent click on the login button
+     * @throws IOException
+     * @throws SQLException
+     */
     public void loginButtonClicked(ActionEvent mouseEvent) throws IOException, SQLException {
         // get form values
         String usernameInput = username.getText();
@@ -146,6 +155,10 @@ public class MainController implements Initializable {
         outputFile.close();
     }
 
+    /**
+     * @description Exit the program
+     * @param mouseEvent
+     */
     public void exitButtonClicked(ActionEvent mouseEvent) {
         System.exit(0);
     }
