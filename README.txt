@@ -3,8 +3,8 @@ Appointment Application
 
 Purpose:
 Application is the task 1 project for the Software II - Advanced Java Concepts - C195 course for WGU. The application
-allows users to create appointments and customers. Appointments are assigned to customers, users, and contacts. The application
-provides reports to users on the current work hours and work shedules.
+allows users to create appointments and customers. Appointments are assigned to customers, users, and contacts.
+The application provides reports to users on the current work hours and work shedules.
 
 Author Information:
 Matthew Brandenburg
