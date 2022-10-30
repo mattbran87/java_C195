@@ -119,7 +119,7 @@ public class AddAppointment {
             alert.showAndWait();
             return;
         } else {
-            startTimeInput = appointmentStartTime.getText();
+            startTimeInput = appointmentStartTime.getText() + ":00";
         }
 
         String endTimeInput = "";
@@ -128,7 +128,7 @@ public class AddAppointment {
             alert.showAndWait();
             return;
         } else {
-            endTimeInput = appointmentEndTime.getText();
+            endTimeInput = appointmentEndTime.getText() + ":00";
         }
 
         int custIDInput = 0;
@@ -158,8 +158,8 @@ public class AddAppointment {
             cidInput = Integer.parseInt(appointmentCID.getValue().toString());
         }
 
-        LocalTime parsedStartTime = LocalTime.parse(startTimeInput + ":00");
-        LocalTime parsedEndTime = LocalTime.parse(endTimeInput + ":00");
+        LocalTime parsedStartTime = LocalTime.parse(startTimeInput);
+        LocalTime parsedEndTime = LocalTime.parse(endTimeInput);
 
         LocalDateTime newStartDateTime = LocalDateTime.of(startDateInput, parsedStartTime);
         LocalDateTime newEndDateTime = LocalDateTime.of(endDateInput, parsedEndTime);

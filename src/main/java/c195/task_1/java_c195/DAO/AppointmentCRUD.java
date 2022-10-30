@@ -166,12 +166,17 @@ public class AppointmentCRUD {
      * @throws SQLException
      */
     public static int deleteAppointment(int appointmentID) throws SQLException {
-        String query = "DELETE FROM appointments WHERE Appointment_ID=?";
-        PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
-        ps.setInt(1, appointmentID);
-        int result = ps.executeUpdate();
-        ps.close();
-        return result;
+        try {
+            String query = "DELETE FROM appointments WHERE Appointment_ID=?";
+            PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
+            ps.setInt(1, appointmentID);
+            int result = ps.executeUpdate();
+            ps.close();
+            return result;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return 0;
     }
 
     /**

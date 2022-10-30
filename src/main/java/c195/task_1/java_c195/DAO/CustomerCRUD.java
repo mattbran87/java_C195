@@ -121,12 +121,17 @@ public class CustomerCRUD {
      * @throws SQLException
      */
     public static int deleteCustomer(int customerID) throws SQLException {
-        String query = "DELETE FROM customers WHERE Customer_ID=?";
-        PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
-        ps.setInt(1, customerID);
-        int result = ps.executeUpdate();
-        ps.close();
-        return result;
+        try {
+            String query = "DELETE FROM customers WHERE Customer_ID=?";
+            PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
+            ps.setInt(1, customerID);
+            int result = ps.executeUpdate();
+            ps.close();
+            return result;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return 0;
     }
 
     /**

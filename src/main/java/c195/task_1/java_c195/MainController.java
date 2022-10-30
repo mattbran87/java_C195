@@ -49,12 +49,15 @@ public class MainController implements Initializable {
     public Button exitButton;
 
     /**
-     * @description When page is initially loaded translate input labels. Defaults to US English
+     * @description When page is initially loaded translate input labels. Defaults to US English. Function uses lambda
+     * expression to assign the System.exit() function to the exit button.
      * @param url URL of the current page
      * @param rb gets the language resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // second lambda expression.
+        exitButton.setOnAction( mouseEvent -> System.exit(0));
         try {
             // get location
             Locale locale = Locale.getDefault();
@@ -153,13 +156,6 @@ public class MainController implements Initializable {
             alert.show();
         }
         outputFile.close();
-    }
 
-    /**
-     * @description Exit the program
-     * @param mouseEvent
-     */
-    public void exitButtonClicked(ActionEvent mouseEvent) {
-        System.exit(0);
     }
 }

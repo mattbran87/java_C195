@@ -99,7 +99,8 @@ public class Customers {
     }
 
     /**
-     * @description delete selected customer from customers table
+     * @description delete selected customer from customers table and customers associated appointments. Function uses lambda
+     * to delete each appointment for the customer using the appointment ID for each associated appointment.
      * @param actionEvent
      */
     public void deleteButtonClicked(ActionEvent actionEvent) {
@@ -113,10 +114,15 @@ public class Customers {
                 // first get any associated appointments and delete them all
                 ObservableList<Appointment> customerAppoinments = AppointmentCRUD.getAllCustomerAppointments(customerID);
                 if (customerAppoinments.size() > 0) {
-                    for (Appointment appointment: customerAppoinments) {
-                        Integer appointmentID = appointment.getAppointmentID();
-                        AppointmentCRUD.deleteAppointment(appointmentID);
-                    }
+
+                    // lambda expression 1. Try catch required by text editor
+                    customerAppoinments.forEach( (Appointment appointment) -> {
+                        try {
+                            AppointmentCRUD.deleteAppointment(appointment.getAppointmentID());
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } );
                 }
                 // then delete customer
                 CustomerCRUD.deleteCustomer(customerID);
