@@ -36,6 +36,9 @@ public class UpdateCustomer {
     public TextField address;
     public TextField zipcode;
     public TextField phoneNumber;
+    /**
+     * customer object. Object is instantiated in the passCustomerData function
+     */
     public Customer customer;
 
     /**

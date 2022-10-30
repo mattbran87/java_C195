@@ -40,6 +40,9 @@ public class UpdateAppointment {
     public Button saveAppointment;
     public Button cancelAppointment;
 
+    /**
+     * customer object. Object is instantiated in the passAppointmentData function
+     */
     public Appointment appointment;
 
     /**

@@ -32,7 +32,9 @@ public class AddCustomer {
     public TextField address;
     public TextField zipcode;
     public TextField phoneNumber;
-
+    /**
+     * customer object that has not been instantiated
+     */
     public Customer customer;
 
     public void initialize() throws SQLException {

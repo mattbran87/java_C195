@@ -38,6 +38,9 @@ public class AddAppointment {
     public ComboBox appointmentCID;
     public Button saveAppointment;
     public Button cancelAppointment;
+    /**
+     * appointment object that has not been instantiated
+     */
     public Appointment appointment;
 
     public void initialize() throws SQLException {
