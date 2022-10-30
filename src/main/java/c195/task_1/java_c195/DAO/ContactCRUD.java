@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class ContactCRUD {
+    /**
+     * @description get all contacts in contacts table
+     * @return contactsObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Contact> getAllContacts() throws SQLException {
         ObservableList<Contact> contactsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from contacts";
@@ -33,6 +38,11 @@ public class ContactCRUD {
         return contactsObservableList;
     }
 
+    /**
+     * @description get all the contact ids
+     * @return contactsObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Integer> getAllContactIDs() throws SQLException {
         ObservableList<Integer> contactsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT Contact_ID from contacts";

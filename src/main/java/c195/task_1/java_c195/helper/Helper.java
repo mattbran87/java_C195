@@ -7,6 +7,11 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Helper {
+    /**
+     * @description convert local date time to UTC string
+     * @param dateValue
+     * @return formattedUTC
+     */
     public static String convertLocalDateTimeToUTC(LocalDateTime dateValue) {
         ZonedDateTime zonedDateTime = dateValue.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
         ZonedDateTime dateTimeUTC = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
@@ -15,6 +20,11 @@ public class Helper {
         return formattedUTC;
     }
 
+    /**
+     * @description convert local date time EST string
+     * @param dateValue
+     * @return dateTimeUTC
+     */
     public static ZonedDateTime convertLocalDateTimeToEST(LocalDateTime dateValue) {
         ZonedDateTime zonedDateTime = dateValue.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
         ZonedDateTime dateTimeUTC = zonedDateTime.withZoneSameInstant(ZoneId.of("SystemV/EST5EDT"));
@@ -22,6 +32,10 @@ public class Helper {
         return dateTimeUTC;
     }
 
+    /**
+     * @description get the current time formatted string
+     * @return formattedNow
+     */
     public static String getCurrentFormattedTimeUTC() {
         LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
         String formattedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

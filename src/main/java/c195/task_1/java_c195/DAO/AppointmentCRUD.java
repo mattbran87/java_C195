@@ -16,6 +16,11 @@ import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
 import static c195.task_1.java_c195.helper.Helper.getCurrentFormattedTimeUTC;
 
 public class AppointmentCRUD {
+    /**
+     * @description get all appointments in the appointments table
+     * @return appointmentsObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from appointments";
@@ -51,6 +56,13 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
+    /**
+     * @description get all appointments in the appointments table that fall in between the date range parameters
+     * @param startDate
+     * @param endDate
+     * @return appointmentsObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Appointment> getAppointmentsByDateRange(String startDate, String endDate) throws SQLException {
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM appointments WHERE Start BETWEEN '"+ startDate + "' AND '" + endDate + "'";
@@ -88,6 +100,12 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
+    /**
+     * @description get all appointments in the appointments table that match the customer id
+     * @param customersID
+     * @return appointmentsObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Appointment> getAllCustomerAppointments(int customersID) throws SQLException {
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from appointments WHERE Customer_ID=?";
@@ -125,6 +143,11 @@ public class AppointmentCRUD {
         return appointmentsObservableList;
     }
 
+    /**
+     * @description generate a new id for an appointment
+     * @return maxID
+     * @throws SQLException
+     */
     public static int generateNewID() throws SQLException {
         String query = "SELECT MAX(Appointment_ID) AS max_id FROM appointments";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -136,6 +159,12 @@ public class AppointmentCRUD {
         return maxID;
     }
 
+    /**
+     * @description delete appointment from the appointments table
+     * @param appointmentID
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int deleteAppointment(int appointmentID) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -145,6 +174,12 @@ public class AppointmentCRUD {
         return result;
     }
 
+    /**
+     * @description add new appointment record to the appointments table
+     * @param appointment
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int addAppointment(Appointment appointment) throws SQLException {
         User user = UserCRUD.getUserByID(appointment.getUserID());
 
@@ -192,6 +227,12 @@ public class AppointmentCRUD {
         return 0;
     }
 
+    /**
+     * @description update existing appointment record in the appointments table by matching appointment id
+     * @param appointment
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int upDateAppointment(Appointment appointment) throws SQLException {
         // get user object by user id on appointment
         User user = UserCRUD.getUserByID(appointment.getUserID());

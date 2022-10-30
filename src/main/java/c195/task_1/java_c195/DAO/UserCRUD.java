@@ -10,6 +10,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserCRUD {
+    /**
+     * @description get list of all users in user table
+     * @return user
+     * @throws SQLException
+     */
+    public static ObservableList<userLogin> getAllUsers() throws SQLException {
+        ObservableList<userLogin> userList = FXCollections.observableArrayList();
+        String queryString = "SELECT * from users";
+        PreparedStatement preparedString = JDBC.openConnection().prepareStatement(queryString);
+        ResultSet resultSet = preparedString.executeQuery();
+        while (resultSet.next()) {
+            int userID = resultSet.getInt("User_ID");
+            String userName = resultSet.getString("User_Name");
+            String userPassword = resultSet.getString("Password");
+            userLogin user = new userLogin(userID, userName, userPassword);
+            userList.add(user);
+        }
+        return userList;
+    }
+
+    /**
+     * @description get all the user ids
+     * @return userList
+     * @throws SQLException
+     */
     public static ObservableList<Integer> getAllUserIDs() throws SQLException {
         ObservableList<Integer> userList = FXCollections.observableArrayList();
         String queryString = "SELECT User_ID from users";
@@ -22,6 +47,12 @@ public class UserCRUD {
         return userList;
     }
 
+    /**
+     * @description query for user by userID
+     * @param id
+     * @return user
+     * @throws SQLException
+     */
     public static User getUserByID(Integer id) throws SQLException {
         String sql = "SELECT * from users WHERE User_ID = '" + id + "'";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);

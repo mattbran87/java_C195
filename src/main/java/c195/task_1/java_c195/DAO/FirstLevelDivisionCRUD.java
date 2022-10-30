@@ -11,7 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FirstLevelDivisionCRUD {
-
+    /**
+     * @description get all first level divisions in first_level_divisions table
+     * @return firstLevelDomainObservableList
+     * @throws SQLException
+     */
     public static ObservableList<FirstLevelDivision> getAllFirstLevelDivisions() throws SQLException {
         ObservableList<FirstLevelDivision> firstLevelDomainObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from first_level_divisions";
@@ -33,6 +37,12 @@ public class FirstLevelDivisionCRUD {
         return firstLevelDomainObservableList;
     }
 
+    /**
+     * @description get the first level division in table that matches division id
+     * @param divisionID
+     * @return firstLevelDivision
+     * @throws SQLException
+     */
     public static FirstLevelDivision getFirstLevelDivisionByDivisionID(int divisionID) throws SQLException {
         String sql = "SELECT * from first_level_divisions WHERE Division_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
@@ -53,6 +63,12 @@ public class FirstLevelDivisionCRUD {
         return firstLevelDivision;
     }
 
+    /**
+     * @description get the first level division in table that matches division name
+     * @param divisionName
+     * @return firstLevelDivision
+     * @throws SQLException
+     */
     public static FirstLevelDivision getFirstLevelDivisionByDivisionName(String divisionName) throws SQLException {
         String sql = "SELECT * from first_level_divisions WHERE Division=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
@@ -73,6 +89,12 @@ public class FirstLevelDivisionCRUD {
         return firstLevelDivision;
     }
 
+    /**
+     * @description get all first level division names that match by country id
+     * @param ctryID
+     * @return firstLevelDomainObservableList
+     * @throws SQLException
+     */
     public static ObservableList<String> getAllFirstLevelDivisionNamesByCountryID(int ctryID) throws SQLException {
         ObservableList<String> firstLevelDomainObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from first_level_divisions WHERE Country_ID=?";

@@ -14,6 +14,11 @@ import java.sql.SQLException;
 import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
 
 public class CustomerCRUD {
+    /**
+     * @description get all customers from customer table
+     * @return customersObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         ObservableList<Customer> customersObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from customers";
@@ -42,6 +47,11 @@ public class CustomerCRUD {
         return customersObservableList;
     }
 
+    /**
+     * @description get all customer ids from customers table
+     * @return customersObservableList
+     * @throws SQLException
+     */
     public static ObservableList<Integer> getAllCustomerIDs() throws SQLException {
         ObservableList<Integer> customersObservableList = FXCollections.observableArrayList();
         String sql = "SELECT Customer_ID from customers";
@@ -56,6 +66,12 @@ public class CustomerCRUD {
         return customersObservableList;
     }
 
+    /**
+     * @description get customer from customers table that matches the Customer ID
+     * @param id
+     * @return customer
+     * @throws SQLException
+     */
     public static Customer getCustomerByID(Integer id) throws SQLException {
         String sql = "SELECT * from customers WHERE Customer_ID = '" + id + "'";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
@@ -82,6 +98,11 @@ public class CustomerCRUD {
         return customer;
     }
 
+    /**
+     * @description generate new customer ID
+     * @return maxID
+     * @throws SQLException
+     */
     public static int generateNewID() throws SQLException {
         String query = "SELECT MAX(Customer_ID) AS max_id FROM customers";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -93,6 +114,12 @@ public class CustomerCRUD {
         return maxID;
     }
 
+    /**
+     * @description delete customer from customers table that matches customer ID
+     * @param customerID
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int deleteCustomer(int customerID) throws SQLException {
         String query = "DELETE FROM customers WHERE Customer_ID=?";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(query);
@@ -102,6 +129,12 @@ public class CustomerCRUD {
         return result;
     }
 
+    /**
+     * @description add new customer to the customers table
+     * @param customer
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int addCustomer(Customer customer) throws SQLException {
         try {
             String query = "INSERT INTO customers (" +
@@ -131,6 +164,12 @@ public class CustomerCRUD {
         return 0;
     }
 
+    /**
+     * @description update existing customer record in the customers table by matching customer id
+     * @param customer
+     * @return int 0 for fail 1 for success
+     * @throws SQLException
+     */
     public static int updateCustomer(Customer customer) throws SQLException {
         try {
             String query = "UPDATE customers " +
