@@ -34,6 +34,7 @@ public class Helper {
 
     /**
      * get the current time formatted string
+     *
      * @return formattedNow
      */
     public static String getCurrentFormattedTimeUTC() {

@@ -112,6 +112,8 @@ public class UpdateAppointment {
         LocalDateTime newStartDateTime = LocalDateTime.of(startDateInput, parsedStartTime);
         LocalDateTime newEndDateTime = LocalDateTime.of(endDateInput, parsedEndTime);
 
+        User user = UserCRUD.getUserByID(appointment.getUserID());
+
         appointment.setAppointmentID(idInput);
         appointment.setTitle(titleInput);
         appointment.setDescription(DescInput);
@@ -119,6 +121,7 @@ public class UpdateAppointment {
         appointment.setType(typeInput);
         appointment.setStart(newStartDateTime);
         appointment.setEnd(newEndDateTime);
+        appointment.setLastUpdatedBy(user.getUsername());
         appointment.setCustomerID(custIDInput);
         appointment.setUserID(uidInput);
         appointment.setContactID(cidInput);

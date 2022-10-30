@@ -28,7 +28,7 @@ public class Customer {
     }
 
     /**
-     get customer name
+     * get customer name
      * @return name
      */
     public String getName() {
@@ -36,7 +36,7 @@ public class Customer {
     }
 
     /**
-     get customer address
+     * get customer address
      * @return address
      */
     public String getAddress() {
@@ -44,7 +44,7 @@ public class Customer {
     }
 
     /**
-     get postal code
+     * get postal code
      * @return postalCode
      */
     public String getPostalCode() {
@@ -52,7 +52,7 @@ public class Customer {
     }
 
     /**
-     get the customer phone number
+     * get the customer phone number
      * @return phoneNumber
      */
     public String getPhoneNumber() {
@@ -60,7 +60,7 @@ public class Customer {
     }
 
     /**
-     get the division string
+     * get the division string
      * @return division
      */
     public String getDivision() {
@@ -68,7 +68,7 @@ public class Customer {
     }
 
     /**
-     the the country string
+     * get the country string
      * @return country
      */
     public String getCountry() {
@@ -76,7 +76,7 @@ public class Customer {
     }
 
     /**
-     get the division id
+     * get the division id
      * @return divisionID
      */
     public Integer getDivisionID() {
@@ -84,7 +84,7 @@ public class Customer {
     }
 
     /**
-     set the customer id
+     * set the customer id
      * @param customerID
      */
     public void setCustomerID(Integer customerID) {
@@ -92,7 +92,7 @@ public class Customer {
     }
 
     /**
-     set the customer name
+     * set the customer name
      * @param name
      */
     public void setName(String name) {
@@ -100,7 +100,7 @@ public class Customer {
     }
 
     /**
-     set the address
+     * set the address
      * @param address
      */
     public void setAddress(String address) {
@@ -108,7 +108,7 @@ public class Customer {
     }
 
     /**
-     set the postal code
+     * set the postal code
      * @param postalCode
      */
     public void setPostalCode(String postalCode) {

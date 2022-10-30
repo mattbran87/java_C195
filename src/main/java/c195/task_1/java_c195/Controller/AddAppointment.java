@@ -3,6 +3,7 @@ package c195.task_1.java_c195.Controller;
 import c195.task_1.java_c195.DAO.ContactCRUD;
 import c195.task_1.java_c195.DAO.CustomerCRUD;
 import c195.task_1.java_c195.DAO.UserCRUD;
+import c195.task_1.java_c195.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,7 @@ import java.time.ZonedDateTime;
 
 import static c195.task_1.java_c195.DAO.AppointmentCRUD.*;
 import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToEST;
+import static c195.task_1.java_c195.helper.Helper.getCurrentFormattedTimeUTC;
 
 public class AddAppointment {
     public TextField appointmentID;
@@ -43,6 +45,10 @@ public class AddAppointment {
      */
     public Appointment appointment;
 
+    /**
+     * on view initialization the id, customer id, user id, and customer id inputs are populated
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         // set id field on page load
         appointmentID.setText(String.valueOf(generateNewID()));
@@ -219,6 +225,10 @@ public class AddAppointment {
                 uidInput,
                 cidInput
         );
+
+        User user = UserCRUD.getUserByID(appointment.getUserID());
+        appointment.setCreatedBy(user.getUsername());
+        appointment.setLastUpdatedBy(user.getUsername());
 
         int addAppointment = addAppointment(appointment);
 

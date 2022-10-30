@@ -39,6 +39,11 @@ public class Customers {
     public Button reportsButton;
     public Button exitButton;
 
+    /**
+     * on view initialization the customer objects get country and division names set. View table is populated with customer
+     * object data.
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         ObservableList<Customer> allCustomers = CustomerCRUD.getAllCustomers();
         for (Customer customer : allCustomers) {

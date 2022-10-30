@@ -10,25 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserCRUD {
-    /**
-     * get list of all users in user table
-     * @return user
-     * @throws SQLException
-     */
-    public static ObservableList<userLogin> getAllUsers() throws SQLException {
-        ObservableList<userLogin> userList = FXCollections.observableArrayList();
-        String queryString = "SELECT * from users";
-        PreparedStatement preparedString = JDBC.openConnection().prepareStatement(queryString);
-        ResultSet resultSet = preparedString.executeQuery();
-        while (resultSet.next()) {
-            int userID = resultSet.getInt("User_ID");
-            String userName = resultSet.getString("User_Name");
-            String userPassword = resultSet.getString("Password");
-            userLogin user = new userLogin(userID, userName, userPassword);
-            userList.add(user);
-        }
-        return userList;
-    }
 
     /**
      * get all the user ids

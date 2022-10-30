@@ -62,7 +62,7 @@ public class MainController implements Initializable {
             // get location
             Locale locale = Locale.getDefault();
             Locale.setDefault(locale);
-//            Locale.setDefault(new Locale("fr", "FR"));
+            //Locale.setDefault(new Locale("fr", "FR"));
 
             // get resource bundle and add stored language values
             rb = ResourceBundle.getBundle("language_files/login", Locale.getDefault());

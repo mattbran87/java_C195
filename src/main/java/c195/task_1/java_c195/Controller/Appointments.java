@@ -46,6 +46,10 @@ public class Appointments {
     public Button reportsButton;
     public Button exitButton;
 
+    /**
+     * on view initialization the view table is populated with appointments
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         // get all appointments
         ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();

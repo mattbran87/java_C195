@@ -37,6 +37,10 @@ public class AddCustomer {
      */
     public Customer customer;
 
+    /**
+     * on view initialization the id and country combox are populated
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         // set id field on page load
         customerID.setText(String.valueOf(CustomerCRUD.generateNewID()));

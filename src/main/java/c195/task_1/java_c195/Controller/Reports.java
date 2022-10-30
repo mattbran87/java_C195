@@ -19,7 +19,6 @@ import c195.task_1.java_c195.MainApplication;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Hashtable;
 import java.util.Map;
@@ -51,6 +50,10 @@ public class Reports {
     public TableColumn hoursScheduledHours;
     public TableColumn hoursScheduledHoursYTD;
 
+    /**
+     * on view initialization combobox and tables are populated with data
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         // add contact names to combobox
         ObservableList<String> contactNames = ContactCRUD.getAllContactNames();
@@ -140,7 +143,7 @@ public class Reports {
     }
 
     /**
-     * description get all appointments and builds an ObservableArrayList of HoursReport objects and returns it to
+     * get all appointments and builds an ObservableArrayList of HoursReport objects and returns it to
      * be displayed in the Hours Scheduled Per Contact report
      * @return hoursReports
      * @throws SQLException
@@ -156,7 +159,7 @@ public class Reports {
             LocalDateTime start = appointment.getStart();
             LocalDateTime end = appointment.getEnd();
             long minutesDifference = ChronoUnit.MINUTES.between(start, end);
-            float hours = minutesDifference / 60;
+            float hours = minutesDifference / 60f;
             boolean scheduled = false;
             boolean worked = false;
             Hashtable<String, Float> hoursTable = new Hashtable<String, Float>();

@@ -1,18 +1,13 @@
 package c195.task_1.java_c195.DAO;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import c195.task_1.java_c195.helper.JDBC;
 import c195.task_1.java_c195.Model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class userLogin extends User {
     /**

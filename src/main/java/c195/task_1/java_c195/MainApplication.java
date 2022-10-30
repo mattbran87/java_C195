@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApplication extends Application {
+    /**
+     * start application and forward user to login view
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("MainView.fxml"));
@@ -18,6 +23,10 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    /**
+     * load database and any contextual data at start of application
+     * @param args
+     */
     public static void main(String[] args) {
         JDBC.openConnection();
         JDBC.closeConnection();

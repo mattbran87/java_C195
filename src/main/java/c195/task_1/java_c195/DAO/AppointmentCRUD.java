@@ -229,8 +229,6 @@ public class AppointmentCRUD {
      * @throws SQLException
      */
     public static int addAppointment(Appointment appointment) throws SQLException {
-        User user = UserCRUD.getUserByID(appointment.getUserID());
-
         try {
             String query = "INSERT INTO appointments (" +
                     "Appointment_ID, " +
@@ -259,9 +257,9 @@ public class AppointmentCRUD {
             ps.setString(6, convertLocalDateTimeToUTC(appointment.getStart()));
             ps.setString(7, convertLocalDateTimeToUTC(appointment.getEnd()));
             ps.setString(8, getCurrentFormattedTimeUTC());
-            ps.setString(9, user.getUsername());
+            ps.setString(9, appointment.getCreatedBy());
             ps.setString(10, getCurrentFormattedTimeUTC());
-            ps.setString(11, user.getUsername());
+            ps.setString(11, appointment.getLastUpdatedBy());
             ps.setInt(12, appointment.getCustomerID());
             ps.setInt(13, appointment.getUserID());
             ps.setInt(14, appointment.getContactID());

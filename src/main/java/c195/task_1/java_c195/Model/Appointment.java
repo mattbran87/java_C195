@@ -13,7 +13,7 @@ public class Appointment {
     private LocalDateTime end;
     private LocalDateTime createDate;
     private String createdBy;
-    private LocalDateTime lastUpdate;
+    private LocalDateTime lastUpdatedDate;
     private String lastUpdatedBy;
     private Integer customerID;
     private Integer userID;
@@ -34,7 +34,7 @@ public class Appointment {
     }
 
     /**
-     * * set the appointment id
+     * set the appointment id
      * @param id
      */
     public void setAppointmentID(Integer id) {
@@ -42,7 +42,7 @@ public class Appointment {
     }
 
     /**
-     * * get the appointment id
+     * get the appointment id
      * @return id
      */
     public Integer getAppointmentID() {
@@ -50,7 +50,7 @@ public class Appointment {
     }
 
     /**
-     * * set the title
+     * set the title
      * @param title
      */
     public void setTitle(String title) {
@@ -179,18 +179,18 @@ public class Appointment {
 
     /**
      * set the last update datetime
-     * @param lastUpdate
+     * @param lastUpdatedDate
      */
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
     /**
      * get the last update datetime
      * @return lastUpdate
      */
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
     /**

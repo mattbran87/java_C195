@@ -1,6 +1,5 @@
 package c195.task_1.java_c195.DAO;
 
-import c195.task_1.java_c195.Model.Appointment;
 import c195.task_1.java_c195.Model.FirstLevelDivision;
 import c195.task_1.java_c195.helper.JDBC;
 import javafx.collections.FXCollections;
