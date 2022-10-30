@@ -63,7 +63,7 @@ public class MainController implements Initializable {
             // get location
             Locale locale = Locale.getDefault();
             Locale.setDefault(locale);
-            Locale.setDefault(new Locale("fr", "FR"));
+//            Locale.setDefault(new Locale("fr", "FR"));
 
             // get resource bundle and add stored language values
             rb = ResourceBundle.getBundle("language_files/login", Locale.getDefault());
@@ -115,6 +115,7 @@ public class MainController implements Initializable {
             LocalDateTime nowMinus15 = LocalDateTime.now().minusMinutes(15);
             LocalDateTime startTime;
             String getAppointmentTitle = "";
+            Integer appointmentID = 0;
             LocalDateTime upcomingAppointmentTime = null;
             boolean hasAppointments = false;
 
@@ -136,13 +137,14 @@ public class MainController implements Initializable {
                 // check if appointment is scheduled within 15 minutes before or after login time
                 if (startTime.isAfter(nowMinus15) && startTime.isBefore(nowPlus15)) {
                     getAppointmentTitle = appointment.getTitle();
+                    appointmentID = appointment.getAppointmentID();
                     upcomingAppointmentTime = startTime;
                     hasAppointments = true;
                 }
             }
             if (hasAppointments) {
                 String displayTime = upcomingAppointmentTime.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm"));
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment " + getAppointmentTitle + " is starting at" + displayTime + ".");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment " + getAppointmentTitle + " - ID: " + appointmentID + " is starting at" + displayTime + ".");
                 Optional<ButtonType> confirmation = alert.showAndWait();
                 System.out.println("15 Minute Reminder");
             } else {

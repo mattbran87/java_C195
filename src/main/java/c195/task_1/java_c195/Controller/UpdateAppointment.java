@@ -1,5 +1,7 @@
 package c195.task_1.java_c195.Controller;
 
+import c195.task_1.java_c195.DAO.AppointmentCRUD;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +26,7 @@ import java.util.TimeZone;
 
 import static c195.task_1.java_c195.DAO.AppointmentCRUD.upDateAppointment;
 import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToEST;
+import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
 
 public class UpdateAppointment {
     public TextField appointmentID;
@@ -215,6 +218,23 @@ public class UpdateAppointment {
 
         LocalTime scheduleStartTime = LocalTime.of(8, 0, 0);
         LocalTime scheduleEndTime = LocalTime.of(22, 0, 0);
+
+        ObservableList<Appointment> appointmentsOverlapObservableList =
+                AppointmentCRUD.getAppointmentsByDateRange(convertLocalDateTimeToUTC(newStartDateTime), convertLocalDateTimeToUTC(newEndDateTime));
+
+        if (appointmentsOverlapObservableList.size() > 0) {
+            for (Appointment overlapAppointment : appointmentsOverlapObservableList) {
+                Integer overlapAppointmentCustomerID = overlapAppointment.getCustomerID();
+                Integer overlapAppointmentID = overlapAppointment.getAppointmentID();
+                if (overlapAppointmentCustomerID == custIDInput &&
+                        overlapAppointmentID != idInput
+                ) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Customer is already scheduled for that time.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+        }
 
         if (startDayOfWeek == "SATURDAY" ||
                 startDayOfWeek == "SUNDAY"

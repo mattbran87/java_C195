@@ -29,7 +29,7 @@
             <TableColumn fx:id="appointmentsTableStart" prefWidth="92.0" text="Start Date" />
             <TableColumn fx:id="appointmentsTableEnd" prefWidth="88.0" text="End Date" />
             <TableColumn fx:id="appointmentsTableCustID" minWidth="0.0" prefWidth="77.0" text="Customer ID" />
-            <TableColumn fx:id="appointmentsTableCID" prefWidth="64.0" text="Contact ID" />
+            <TableColumn fx:id="appointmentsTableCID" prefWidth="64.0" text="Contact" />
             <TableColumn fx:id="appointmentsTableUID" prefWidth="49.0" text="User ID" />
         </columns>
       </TableView>
