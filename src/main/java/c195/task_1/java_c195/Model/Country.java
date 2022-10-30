@@ -10,7 +10,7 @@ public class Country {
     }
 
     /**
-     * @description get the country ID
+     * get the country ID
      * @return countryID
      */
     public int getCountryID() {
@@ -18,7 +18,7 @@ public class Country {
     }
 
     /**
-     * @description get the country name
+     * get the country name
      * @return country
      */
     public String getCountryName() {

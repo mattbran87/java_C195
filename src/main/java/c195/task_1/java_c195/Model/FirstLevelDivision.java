@@ -12,7 +12,7 @@ public class FirstLevelDivision {
     }
 
     /**
-     * @description get the division id
+     * get the division id
      * @return divisionID
      */
     public int getDivisionID() {
@@ -20,7 +20,7 @@ public class FirstLevelDivision {
     }
 
     /**
-     * @description get the division
+     * get the division
      * @return division
      */
     public String getDivisionName() {
@@ -28,7 +28,7 @@ public class FirstLevelDivision {
     }
 
     /**
-     * @description get the country id
+     * get the country id
      * @return countryID
      */
     public int getCountryID() {

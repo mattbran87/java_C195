@@ -65,7 +65,7 @@ public class Appointments {
     }
 
     /**
-     * @description filter table view and show all appointments
+     * filter table view and show all appointments
      * @param actionEvent
      * @throws SQLException
      */
@@ -76,7 +76,7 @@ public class Appointments {
     }
 
     /**
-     * @description filter table view and show only appointments that are going scheduled within the next 7-day period
+     * filter table view and show only appointments that are going scheduled within the next 7-day period
      * @param actionEvent
      * @throws SQLException
      */
@@ -91,7 +91,7 @@ public class Appointments {
     }
 
     /**
-     * @description filter table view and show only appointments that are going scheduled within the next 1-month period
+     * filter table view and show only appointments that are going scheduled within the next 1-month period
      * @param actionEvent
      * @throws SQLException
      */
@@ -106,7 +106,7 @@ public class Appointments {
     }
 
     /**
-     * @description go to AddAppointment view to add a new appointment record
+     * go to AddAppointment view to add a new appointment record
      * @param actionEvent
      * @throws IOException
      */
@@ -120,7 +120,7 @@ public class Appointments {
     }
 
     /**
-     * @description go to UpdateAppointment view with the selected appointment record data loaded in view inputs
+     * go to UpdateAppointment view with the selected appointment record data loaded in view inputs
      * @param actionEvent
      * @throws IOException
      * @throws SQLException
@@ -146,7 +146,7 @@ public class Appointments {
     }
 
     /**
-     * @description delete selected appointment from appointments table
+     * delete selected appointment from appointments table
      * @param actionEvent
      */
     public void deleteButtonClicked(ActionEvent actionEvent) {
@@ -169,7 +169,7 @@ public class Appointments {
     }
 
     /**
-     * @description go to customers view
+     * go to customers view
      * @param actionEvent
      * @throws IOException
      */
@@ -183,7 +183,7 @@ public class Appointments {
     }
 
     /**
-     * @description go to reports view
+     * go to reports view
      * @param actionEvent
      * @throws IOException
      */
@@ -197,7 +197,7 @@ public class Appointments {
     }
 
     /**
-     * @description exit program
+     * exit program
      * @param actionEvent
      */
     public void exitButtonClicked(ActionEvent actionEvent) {

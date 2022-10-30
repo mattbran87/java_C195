@@ -12,7 +12,7 @@ public class User {
     }
 
     /**
-     * @description get the user id
+     * get the user id
      * @return userID
      */
     public int getUserID() {
@@ -20,7 +20,7 @@ public class User {
     }
 
     /**
-     * @description get the username
+     * get the username
      * @return username
      */
     public String getUsername() {
@@ -28,7 +28,7 @@ public class User {
     }
 
     /**
-     * @description get password
+     * get password
      * @return password
      */
     public String getPassword() {

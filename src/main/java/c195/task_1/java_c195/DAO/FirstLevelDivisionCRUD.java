@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class FirstLevelDivisionCRUD {
     /**
-     * @description get all first level divisions in first_level_divisions table
+     * get all first level divisions in first_level_divisions table
      * @return firstLevelDomainObservableList
      * @throws SQLException
      */
@@ -38,7 +38,7 @@ public class FirstLevelDivisionCRUD {
     }
 
     /**
-     * @description get the first level division in table that matches division id
+     * get the first level division in table that matches division id
      * @param divisionID
      * @return firstLevelDivision
      * @throws SQLException
@@ -64,7 +64,7 @@ public class FirstLevelDivisionCRUD {
     }
 
     /**
-     * @description get the first level division in table that matches division name
+     * get the first level division in table that matches division name
      * @param divisionName
      * @return firstLevelDivision
      * @throws SQLException
@@ -90,7 +90,7 @@ public class FirstLevelDivisionCRUD {
     }
 
     /**
-     * @description get all first level division names that match by country id
+     * get all first level division names that match by country id
      * @param ctryID
      * @return firstLevelDomainObservableList
      * @throws SQLException

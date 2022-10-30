@@ -15,7 +15,7 @@ public class JDBC {
     public static Connection connection;  // Connection Interface
 
     /**
-     * @description open database connection
+     * open database connection
      * @return connection
      */
     public static Connection openConnection()
@@ -32,7 +32,7 @@ public class JDBC {
     }
 
     /**
-     * @description close database connection
+     * close database connection
      */
     public static void closeConnection() {
         try {

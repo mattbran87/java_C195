@@ -72,7 +72,7 @@ public class Reports {
     }
 
     /**
-     * @description get all appointments and builds an ObservableArrayList of MonthTypeReport objects and returns it to
+     * get all appointments and builds an ObservableArrayList of MonthTypeReport objects and returns it to
      * be displayed in the Appointments By Type & Month report
      * @return monthTypeReports
      * @throws SQLException
@@ -247,7 +247,7 @@ public class Reports {
     }
 
     /**
-     * @description when user selects a contact from the combobox the function updates the contactSchedule table with records
+     * when user selects a contact from the combobox the function updates the contactSchedule table with records
      * matching the selected name
      * @param actionEvent
      */
@@ -266,7 +266,7 @@ public class Reports {
     }
 
     /**
-     * @description go to appointments view
+     * go to appointments view
      * @param actionEvent
      * @throws IOException
      */
@@ -280,7 +280,7 @@ public class Reports {
     }
 
     /**
-     * @description go to customers view
+     * go to customers view
      * @param actionEvent
      * @throws IOException
      */
@@ -294,7 +294,7 @@ public class Reports {
     }
 
     /**
-     * @description exit program
+     * exit program
      * @param actionEvent
      */
     public void exitButton(ActionEvent actionEvent) {

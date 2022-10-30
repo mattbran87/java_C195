@@ -42,7 +42,7 @@ public class UpdateCustomer {
     public Customer customer;
 
     /**
-     * @description load the selected customer user selected from the previous view's table. Load the record data into
+     * load the selected customer user selected from the previous view's table. Load the record data into
      * the matching inputs.
      * @param selectedCustomer
      * @throws SQLException
@@ -68,7 +68,7 @@ public class UpdateCustomer {
     }
 
     /**
-     * @description update existing customer in the database. all inputs are validated for null values. If all inputs are not
+     * update existing customer in the database. all inputs are validated for null values. If all inputs are not
      * empty then customer record is updated and user forwarded to customers view.
      * @param actionEvent
      * @throws SQLException
@@ -160,7 +160,7 @@ public class UpdateCustomer {
     }
 
     /**
-     * @description user is forwarded back to customers view
+     * user is forwarded back to customers view
      * @param actionEvent
      * @throws IOException
      */
@@ -174,7 +174,7 @@ public class UpdateCustomer {
     }
 
     /**
-     * @description when user selects a new division update the country id combobox with related countries
+     * when user selects a new division update the country id combobox with related countries
      * @param actionEvent
      * @throws SQLException
      */

@@ -46,7 +46,7 @@ public class UpdateAppointment {
     public Appointment appointment;
 
     /**
-     * @description load the selected appointment user selected from the previous view's table. Load the record data into
+     * load the selected appointment user selected from the previous view's table. Load the record data into
      * the matching inputs.
      * @param selectedAppointment
      * @throws SQLException
@@ -85,7 +85,7 @@ public class UpdateAppointment {
     }
 
     /**
-     * @description update existing appointment in the database. all inputs are validated for null values and determines if
+     * update existing appointment in the database. all inputs are validated for null values and determines if
      * the appointment date and time falls within business hours. If outside of business hours appointment is not valid. if
      * appointment passes validation the record is updated and user is forwarded back to appointments view.
      * @param actionEvent
@@ -139,7 +139,7 @@ public class UpdateAppointment {
     }
 
     /**
-     * @description user is forwarded back to appointments view
+     * user is forwarded back to appointments view
      * @param actionEvent
      * @throws IOException
      */

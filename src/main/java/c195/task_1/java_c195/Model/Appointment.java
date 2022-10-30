@@ -34,7 +34,7 @@ public class Appointment {
     }
 
     /**
-     * @description set the appointment id
+     * * set the appointment id
      * @param id
      */
     public void setAppointmentID(Integer id) {
@@ -42,7 +42,7 @@ public class Appointment {
     }
 
     /**
-     * @description get the appointment id
+     * * get the appointment id
      * @return id
      */
     public Integer getAppointmentID() {
@@ -50,7 +50,7 @@ public class Appointment {
     }
 
     /**
-     * @description set the title
+     * * set the title
      * @param title
      */
     public void setTitle(String title) {
@@ -58,7 +58,7 @@ public class Appointment {
     }
 
     /**
-      @description get the title
+     * get the title
      * @return title
      */
     public String getTitle() {
@@ -66,7 +66,7 @@ public class Appointment {
     }
 
     /**
-      @description set the description
+     * set the description
      * @param description
      */
     public void setDescription(String description) {
@@ -74,7 +74,7 @@ public class Appointment {
     }
 
     /**
-      @description get the description
+     * get the description
      * @return description
      */
     public String getDescription() {
@@ -82,7 +82,7 @@ public class Appointment {
     }
 
     /**
-      @description set the location
+     * set the location
      * @param location
      */
     public void setLocation(String location) {
@@ -90,7 +90,7 @@ public class Appointment {
     }
 
     /**
-      @description get the location
+     * get the location
      * @return location
      */
     public String getLocation() {
@@ -98,7 +98,7 @@ public class Appointment {
     }
 
     /**
-      @description set the type
+     * set the type
      * @param type
      */
     public void setType(String type) {
@@ -106,7 +106,7 @@ public class Appointment {
     }
 
     /**
-      @description get the type
+     * get the type
      * @return type
      */
     public String getType() {
@@ -114,7 +114,7 @@ public class Appointment {
     }
 
     /**
-      @description set the start time
+     * set the start time
      * @param start
      */
     public void setStart(LocalDateTime start) {
@@ -122,7 +122,7 @@ public class Appointment {
     }
 
     /**
-      @description get the start time
+     * get the start time
      * @return start
      */
     public LocalDateTime getStart() {
@@ -130,7 +130,7 @@ public class Appointment {
     }
 
     /**
-      @description set the end time
+     * set the end time
      * @param end
      */
     public void setEnd(LocalDateTime end) {
@@ -138,7 +138,7 @@ public class Appointment {
     }
 
     /**
-      @description get the end time
+     * get the end time
      * @return end
      */
     public LocalDateTime getEnd() {
@@ -146,7 +146,7 @@ public class Appointment {
     }
 
     /**
-      @description set the creation date
+     * set the creation date
      * @param createDate
      */
     public void setCreateDate(LocalDateTime createDate) {
@@ -154,7 +154,7 @@ public class Appointment {
     }
 
     /**
-      @description get the creation date
+     * get the creation date
      * @return createDate
      */
     public LocalDateTime getCreateDate() {
@@ -162,7 +162,7 @@ public class Appointment {
     }
 
     /**
-      @description set the created by field
+     * set the created by field
      * @param createdBy
      */
     public void setCreatedBy(String createdBy) {
@@ -170,7 +170,7 @@ public class Appointment {
     }
 
     /**
-      @description get the created by field
+     * get the created by field
      * @return createdBy
      */
     public String getCreatedBy() {
@@ -178,7 +178,7 @@ public class Appointment {
     }
 
     /**
-      @description set the last update datetime
+     * set the last update datetime
      * @param lastUpdate
      */
     public void setLastUpdate(LocalDateTime lastUpdate) {
@@ -186,7 +186,7 @@ public class Appointment {
     }
 
     /**
-      @description get the last update datetime
+     * get the last update datetime
      * @return lastUpdate
      */
     public LocalDateTime getLastUpdate() {
@@ -194,7 +194,7 @@ public class Appointment {
     }
 
     /**
-      @description set the last updated by field
+     * set the last updated by field
      * @param lastUpdatedBy
      */
     public void setLastUpdatedBy(String lastUpdatedBy) {
@@ -202,7 +202,7 @@ public class Appointment {
     }
 
     /**
-      @description get the last updated by field
+     * get the last updated by field
      * @return lastUpdatedBy
      */
     public String getLastUpdatedBy() {
@@ -210,7 +210,7 @@ public class Appointment {
     }
 
     /**
-      @description set the customer id
+     * set the customer id
      * @param customerID
      */
     public void setCustomerID(Integer customerID) {
@@ -218,7 +218,7 @@ public class Appointment {
     }
 
     /**
-      @description get the customer id
+     * get the customer id
      * @return customerID
      */
     public Integer getCustomerID() {
@@ -226,7 +226,7 @@ public class Appointment {
     }
 
     /**
-      @description set the set user id
+     * set the set user id
      * @param userID
      */
     public void setUserID(Integer userID) {
@@ -234,7 +234,7 @@ public class Appointment {
     }
 
     /**
-      @description get the set user id
+     * get the set user id
      * @return userID
      */
     public Integer getUserID() {
@@ -242,7 +242,7 @@ public class Appointment {
     }
 
     /**
-      @description set the contact id
+     * set the contact id
      * @param contactID
      */
     public void setContactID(Integer contactID) {
@@ -250,7 +250,7 @@ public class Appointment {
     }
 
     /**
-      @description get the contact id
+     * get the contact id
      * @return contactID
      */
     public Integer getContactID() {

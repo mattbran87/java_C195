@@ -44,7 +44,7 @@ public class AddCustomer {
     }
 
     /**
-     * @description save a new customer to the database. all inputs are validated for null values. If all inputs are not
+     * save a new customer to the database. all inputs are validated for null values. If all inputs are not
      * empty then new customer record is saved and user forwarded to customers view.
      * @param actionEvent
      * @throws SQLException
@@ -136,7 +136,7 @@ public class AddCustomer {
     }
 
     /**
-     * @description user is forwarded back to customers view
+     * user is forwarded back to customers view
      * @param actionEvent
      * @throws IOException
      */
@@ -150,7 +150,7 @@ public class AddCustomer {
     }
 
     /**
-     * @description when user selects a new division update the country id combobox with related countries
+     * when user selects a new division update the country id combobox with related countries
      * @param actionEvent
      * @throws SQLException
      */

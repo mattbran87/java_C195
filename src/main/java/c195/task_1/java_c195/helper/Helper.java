@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Helper {
     /**
-     * @description convert local date time to UTC string
+     * convert local date time to UTC string
      * @param dateValue
      * @return formattedUTC
      */
@@ -21,7 +21,7 @@ public class Helper {
     }
 
     /**
-     * @description convert local date time EST string
+     * convert local date time EST string
      * @param dateValue
      * @return dateTimeUTC
      */
@@ -33,7 +33,7 @@ public class Helper {
     }
 
     /**
-     * @description get the current time formatted string
+     * get the current time formatted string
      * @return formattedNow
      */
     public static String getCurrentFormattedTimeUTC() {

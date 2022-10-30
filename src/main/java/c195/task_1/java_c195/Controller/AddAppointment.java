@@ -52,7 +52,7 @@ public class AddAppointment {
     }
 
     /**
-     * @description save a new appointment to the database. all inputs are validated for null values and determines if
+     * save a new appointment to the database. all inputs are validated for null values and determines if
      * the new appointment date and time falls within business hours. If outside of business hours new appointment is not valid. if
      * new appointment passes validation the record is saved and user is forwarded back to appointments view.
      * @param actionEvent
@@ -236,7 +236,7 @@ public class AddAppointment {
     }
 
     /**
-     * @description user is forwarded back to appointments view
+     * user is forwarded back to appointments view
      * @param actionEvent
      * @throws IOException
      */

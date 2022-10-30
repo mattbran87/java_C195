@@ -59,7 +59,7 @@ public class Customers {
     }
 
     /**
-     * @description go to AddCustomer view to add a new customer record
+     * go to AddCustomer view to add a new customer record
      * @param actionEvent
      * @throws IOException
      */
@@ -73,7 +73,7 @@ public class Customers {
     }
 
     /**
-     * @description go to UpdateCustomer view with the selected customer record data loaded in view inputs
+     * go to UpdateCustomer view with the selected customer record data loaded in view inputs
      * @param actionEvent
      * @throws IOException
      * @throws SQLException
@@ -99,7 +99,7 @@ public class Customers {
     }
 
     /**
-     * @description delete selected customer from customers table and customers associated appointments. Function uses lambda
+     * delete selected customer from customers table and customers associated appointments. Function uses lambda
      * to delete each appointment for the customer using the appointment ID for each associated appointment.
      * @param actionEvent
      */
@@ -136,7 +136,7 @@ public class Customers {
     }
 
     /**
-     * @description go to appointments view
+     * go to appointments view
      * @param actionEvent
      * @throws IOException
      */
@@ -150,7 +150,7 @@ public class Customers {
     }
 
     /**
-     * @description go to reports view
+     * go to reports view
      * @param actionEvent
      * @throws IOException
      */
@@ -163,7 +163,7 @@ public class Customers {
         stage.show();
     }
     /**
-     * @description exit program
+     * exit program
      * @param actionEvent
      */
     public void exitButtonClicked(ActionEvent actionEvent) {

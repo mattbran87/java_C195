@@ -12,7 +12,7 @@ public class Contact {
     }
 
     /**
-     * @description
+     *
      * @return contactID
      */
     public int getContactID() {
@@ -20,7 +20,7 @@ public class Contact {
     }
 
     /**
-     * @description
+     *
      * @return name
      */
     public String getName() {
@@ -28,7 +28,7 @@ public class Contact {
     }
 
     /**
-     * @description
+     *
      * @return email
      */
     public String getEmail() {

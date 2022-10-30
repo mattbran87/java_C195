@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class UserCRUD {
     /**
-     * @description get list of all users in user table
+     * get list of all users in user table
      * @return user
      * @throws SQLException
      */
@@ -31,7 +31,7 @@ public class UserCRUD {
     }
 
     /**
-     * @description get all the user ids
+     * get all the user ids
      * @return userList
      * @throws SQLException
      */
@@ -48,7 +48,7 @@ public class UserCRUD {
     }
 
     /**
-     * @description query for user by userID
+     * query for user by userID
      * @param id
      * @return user
      * @throws SQLException

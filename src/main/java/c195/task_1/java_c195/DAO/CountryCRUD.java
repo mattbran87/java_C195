@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class CountryCRUD {
     /**
-     * @description get all countries from countries table
+     * get all countries from countries table
      * @return countryObservableList
      * @throws SQLException
      */
@@ -36,7 +36,7 @@ public class CountryCRUD {
     }
 
     /**
-     * @description get all country ids from countries table
+     * get all country ids from countries table
      * @return countryObservableList
      * @throws SQLException
      */
@@ -54,7 +54,7 @@ public class CountryCRUD {
     }
 
     /**
-     * @description get all country names from countries table
+     * get all country names from countries table
      * @return countryObservableList
      * @throws SQLException
      */
@@ -72,7 +72,7 @@ public class CountryCRUD {
     }
 
     /**
-     * @description get country from countries table with matching country id
+     * get country from countries table with matching country id
      * @param countryID
      * @return country
      * @throws SQLException
@@ -96,7 +96,7 @@ public class CountryCRUD {
     }
 
     /**
-     * @description get country from countries table with matching country name
+     * get country from countries table with matching country name
      * @param name
      * @return country
      * @throws SQLException

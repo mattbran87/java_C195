@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 public class userLogin extends User {
     /**
-     * @description create user login constructor
+     * create user login constructor
      * @param userID
      * @param userName
      * @param userPassword
@@ -26,7 +26,7 @@ public class userLogin extends User {
     }
 
     /**
-     * @description validate username and password
+     * validate username and password
      * @param username
      * @param password
      * @return userID or 0 if failed

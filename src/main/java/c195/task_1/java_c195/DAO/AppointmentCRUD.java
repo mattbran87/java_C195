@@ -17,7 +17,7 @@ import static c195.task_1.java_c195.helper.Helper.getCurrentFormattedTimeUTC;
 
 public class AppointmentCRUD {
     /**
-     * @description get all appointments in the appointments table
+     * get all appointments in the appointments table
      * @return appointmentsObservableList
      * @throws SQLException
      */
@@ -57,7 +57,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description get all appointments in the appointments table that fall in between the date range parameters
+     * get all appointments in the appointments table that fall in between the date range parameters
      * @param startDate
      * @param endDate
      * @return appointmentsObservableList
@@ -101,7 +101,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description get all appointments in the appointments table that match the customer id
+     * get all appointments in the appointments table that match the customer id
      * @param customersID
      * @return appointmentsObservableList
      * @throws SQLException
@@ -144,7 +144,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description get all appointments in the appointments table that match the contact id
+     * get all appointments in the appointments table that match the contact id
      * @param ID
      * @return appointmentsObservableList
      * @throws SQLException
@@ -187,7 +187,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description generate a new id for an appointment
+     * generate a new id for an appointment
      * @return maxID
      * @throws SQLException
      */
@@ -203,7 +203,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description delete appointment from the appointments table
+     * delete appointment from the appointments table
      * @param appointmentID
      * @return int 0 for fail 1 for success
      * @throws SQLException
@@ -223,7 +223,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description add new appointment record to the appointments table
+     * add new appointment record to the appointments table
      * @param appointment
      * @return int 0 for fail 1 for success
      * @throws SQLException
@@ -276,7 +276,7 @@ public class AppointmentCRUD {
     }
 
     /**
-     * @description update existing appointment record in the appointments table by matching appointment id
+     * update existing appointment record in the appointments table by matching appointment id
      * @param appointment
      * @return int 0 for fail 1 for success
      * @throws SQLException

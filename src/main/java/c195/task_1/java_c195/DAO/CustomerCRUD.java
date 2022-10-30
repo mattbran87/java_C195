@@ -15,7 +15,7 @@ import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToUTC;
 
 public class CustomerCRUD {
     /**
-     * @description get all customers from customer table
+     * get all customers from customer table
      * @return customersObservableList
      * @throws SQLException
      */
@@ -48,7 +48,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description get all customer ids from customers table
+     * get all customer ids from customers table
      * @return customersObservableList
      * @throws SQLException
      */
@@ -67,7 +67,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description get customer from customers table that matches the Customer ID
+     * get customer from customers table that matches the Customer ID
      * @param id
      * @return customer
      * @throws SQLException
@@ -99,7 +99,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description generate new customer ID
+     * generate new customer ID
      * @return maxID
      * @throws SQLException
      */
@@ -115,7 +115,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description delete customer from customers table that matches customer ID
+     * delete customer from customers table that matches customer ID
      * @param customerID
      * @return int 0 for fail 1 for success
      * @throws SQLException
@@ -135,7 +135,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description add new customer to the customers table
+     * add new customer to the customers table
      * @param customer
      * @return int 0 for fail 1 for success
      * @throws SQLException
@@ -170,7 +170,7 @@ public class CustomerCRUD {
     }
 
     /**
-     * @description update existing customer record in the customers table by matching customer id
+     * update existing customer record in the customers table by matching customer id
      * @param customer
      * @return int 0 for fail 1 for success
      * @throws SQLException

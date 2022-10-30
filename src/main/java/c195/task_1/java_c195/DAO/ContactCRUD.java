@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 public class ContactCRUD {
     /**
-     * @description get all contacts in contacts table
+     * get all contacts in contacts table
      * @return contactsObservableList
      * @throws SQLException
      */
@@ -40,7 +40,7 @@ public class ContactCRUD {
     }
 
     /**
-     * @description get all the contact ids
+     * get all the contact ids
      * @return contactsObservableList
      * @throws SQLException
      */
@@ -59,7 +59,7 @@ public class ContactCRUD {
     }
 
     /**
-     * @description get all contact names in contacts
+     * get all contact names in contacts
      * @return contactsObservableList
      * @throws SQLException
      */
@@ -78,7 +78,7 @@ public class ContactCRUD {
     }
 
     /**
-     * @description get contact by contact id
+     * get contact by contact id
      * @param ID
      * @return contact
      * @throws SQLException
@@ -105,7 +105,7 @@ public class ContactCRUD {
     }
 
     /**
-     * @description get contact by contact name
+     * get contact by contact name
      * @param contactName
      * @return contact
      * @throws SQLException
