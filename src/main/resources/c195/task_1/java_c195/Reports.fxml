@@ -25,10 +25,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="8.0" layoutY="8.0" prefHeight="230.0" prefWidth="561.0">
+                        <TableView fx:id="appointmentsTable" layoutX="8.0" layoutY="8.0" prefHeight="230.0" prefWidth="561.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="appointmentsTableYear" prefWidth="102.0" text="Year" />
+                            <TableColumn fx:id="appointmentsTableMonth" prefWidth="110.0" text="Month" />
+                              <TableColumn fx:id="appointmentsTableType" prefWidth="216.0" text="Type" />
+                              <TableColumn fx:id="appointmentsTableAppts" prefWidth="129.0" text="Appointments" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -36,12 +38,41 @@
           </Tab>
           <Tab fx:id="contactSched" onSelectionChanged="#contactSchedSelected" text="Contact Schedule">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Select A Contact ID" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="contactCombobox" onAction="#contactComboboxClicked" prefWidth="150.0" AnchorPane.topAnchor="10.0" />
+                        <TableView fx:id="contactSchedule" layoutX="-3.0" layoutY="44.0" prefHeight="202.0" prefWidth="583.0">
+                          <columns>
+                            <TableColumn fx:id="contactScheduleApptID" prefWidth="100.0" text="Appointment ID" />
+                            <TableColumn fx:id="contactScheduleTitle" prefWidth="50.0" text="Title" />
+                              <TableColumn fx:id="contactScheduleType" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="contactScheduleDesc" prefWidth="75.0" text="Description" />
+                              <TableColumn fx:id="contactScheduleStart" prefWidth="75.0" text="Start" />
+                              <TableColumn fx:id="contactScheduleEnd" prefWidth="75.0" text="End" />
+                              <TableColumn fx:id="contactScheduleCustID" prefWidth="75.0" text="Customer ID" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="hrsPerUsers" onSelectionChanged="#hrsPerUsersSelected" text="Hours Scheduled Per User">
+            <Tab fx:id="hrsPerUsers" onSelectionChanged="#hrsPerUsersSelected" text="Hours Scheduled Per Contact">
                 <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="hoursScheduled" prefHeight="246.0" prefWidth="577.0">
+                          <columns>
+                            <TableColumn fx:id="hoursScheduledContactID" prefWidth="75.0" text="Contact ID" />
+                            <TableColumn fx:id="hoursScheduledName" prefWidth="234.0" text="Contact Name" />
+                              <TableColumn fx:id="hoursScheduledHours" prefWidth="131.0" text="Hours Scheduled" />
+                              <TableColumn fx:id="hoursScheduledHoursYTD" prefWidth="136.0" text="Hours Worked YTD" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
                 </content>
             </Tab>
         </tabs>

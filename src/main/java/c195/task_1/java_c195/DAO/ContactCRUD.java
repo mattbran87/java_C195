@@ -56,4 +56,23 @@ public class ContactCRUD {
 
         return contactsObservableList;
     }
+
+    /**
+     * @description get all contact names in contacts
+     * @return
+     * @throws SQLException
+     */
+    public static ObservableList<String> getAllContactNames() throws SQLException {
+        ObservableList<String> contactsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT Contact_Name from contacts";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            String name = rs.getString("Contact_Name");
+            contactsObservableList.add(name);
+        }
+
+        return contactsObservableList;
+    }
 }
