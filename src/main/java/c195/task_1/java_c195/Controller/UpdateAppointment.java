@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 import static c195.task_1.java_c195.DAO.AppointmentCRUD.upDateAppointment;
+import static c195.task_1.java_c195.helper.Helper.convertLocalDateTimeToEST;
 
 public class UpdateAppointment {
     public TextField appointmentID;
@@ -62,6 +63,8 @@ public class UpdateAppointment {
         String startTimeString = localStartDateTime.format(formatter);
         String endTimeString = localEndDateTime.format(formatter);
 
+        Customer customer = CustomerCRUD.getCustomerByID(selectedAppointment.getCustomerID());
+
         appointmentID.setText(Integer.toString(selectedAppointment.getAppointmentID()));
         appointmentTitle.setText(selectedAppointment.getTitle());
         appointmentDesc.setText(selectedAppointment.getDescription());
@@ -72,8 +75,8 @@ public class UpdateAppointment {
         appointmentStartTime.setText(startTimeString);
         appointmentEndTime.setText(endTimeString);
 
-        appointmentCustID.setItems(CustomerCRUD.getAllCustomerIDs());
-        appointmentCustID.getSelectionModel().select(selectedAppointment.getCustomerID());
+        appointmentCustID.setItems(CustomerCRUD.getAllCustomerNames());
+        appointmentCustID.getSelectionModel().select(customer.getName());
 
         appointmentUID.setItems(UserCRUD.getAllUserIDs());
         appointmentUID.getSelectionModel().select(selectedAppointment.getUserID());
@@ -94,23 +97,152 @@ public class UpdateAppointment {
      */
     public void saveEditAppointment(ActionEvent actionEvent) throws SQLException, IOException {
         int idInput = Integer.parseInt(appointmentID.getText());
-        String titleInput = appointmentTitle.getText();
-        String DescInput = appointmentDesc.getText();
-        String locInput = appointmentLoc.getText();
-        String typeInput = appointmentType.getText();
-        LocalDate startDateInput = appointmentStartDate.getValue();
-        LocalDate endDateInput = appointmentEndDate.getValue();
-        String startTimeInput = appointmentStartTime.getText();
-        String endTimeInput = appointmentEndTime.getText();
-        int custIDInput = Integer.parseInt(appointmentCustID.getValue().toString());
-        int uidInput = Integer.parseInt(appointmentUID.getValue().toString());
-        int cidInput = Integer.parseInt(appointmentCID.getValue().toString());
 
-        LocalTime parsedStartTime = LocalTime.parse(startTimeInput + ":00");
-        LocalTime parsedEndTime = LocalTime.parse(endTimeInput + ":00");
+        String titleInput = "";
+        if (appointmentTitle.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Title input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            titleInput = appointmentTitle.getText();
+        }
+
+        String DescInput = "";
+        if (appointmentDesc.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Description input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            DescInput = appointmentDesc.getText();
+        }
+
+        String locInput = "";
+        if (appointmentLoc.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Location input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            locInput = appointmentLoc.getText();
+        }
+
+        String typeInput = "";
+        if (appointmentType.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Type input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            typeInput = appointmentType.getText();
+        }
+
+        LocalDate startDateInput = null;
+        if (appointmentStartDate.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Start Date input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            startDateInput = appointmentStartDate.getValue();
+        }
+
+        LocalDate endDateInput = null;
+        if (appointmentEndDate.getValue()  == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "End Date input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            endDateInput = appointmentEndDate.getValue();
+        }
+
+        String startTimeInput = "";
+        if (appointmentStartTime.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Start Time input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            startTimeInput = appointmentStartTime.getText() + ":00";
+        }
+
+        String endTimeInput = "";
+        if (appointmentEndTime.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "End Time input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            endTimeInput = appointmentEndTime.getText() + ":00";
+        }
+
+        int custIDInput = 0;
+        if (appointmentCustID.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Customer ID input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            Customer customer = CustomerCRUD.getCustomerByName(appointmentCustID.getValue().toString());
+            custIDInput = customer.getCustomerID();
+        }
+
+        int uidInput = 0;
+        if (appointmentUID.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "User ID input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            uidInput = Integer.parseInt(appointmentUID.getValue().toString());
+        }
+
+        int cidInput = 0;
+        if (appointmentCID.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Contact ID input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            cidInput = Integer.parseInt(appointmentCID.getValue().toString());
+        }
+
+        LocalTime parsedStartTime = LocalTime.parse(startTimeInput);
+        LocalTime parsedEndTime = LocalTime.parse(endTimeInput);
 
         LocalDateTime newStartDateTime = LocalDateTime.of(startDateInput, parsedStartTime);
         LocalDateTime newEndDateTime = LocalDateTime.of(endDateInput, parsedEndTime);
+
+        ZonedDateTime estStartDateTime = convertLocalDateTimeToEST(newStartDateTime);
+        ZonedDateTime estEndDateTime = convertLocalDateTimeToEST(newEndDateTime);
+
+        String startDayOfWeek = estStartDateTime.getDayOfWeek().toString().toUpperCase();
+        String endDayOfWeek = estEndDateTime.getDayOfWeek().toString().toUpperCase();
+
+        LocalTime startTimeOfDay = estStartDateTime.toLocalTime();
+        LocalTime endTimeOfDay = estEndDateTime.toLocalTime();
+
+        LocalTime scheduleStartTime = LocalTime.of(8, 0, 0);
+        LocalTime scheduleEndTime = LocalTime.of(22, 0, 0);
+
+        if (startDayOfWeek == "SATURDAY" ||
+                startDayOfWeek == "SUNDAY"
+        ) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Start day and time is set to a weekend day. Please select a day Monday - Friday.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (endDayOfWeek == "SATURDAY" ||
+                endDayOfWeek == "SUNDAY"
+        ) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "End day and time is set to a weekend day. Please select a day Monday - Friday.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (startTimeOfDay.isAfter(scheduleEndTime) && startTimeOfDay.isBefore(scheduleStartTime)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Start time is set outside of business hours of 8am - 10pm EST");
+            alert.showAndWait();
+            return;
+        }
+
+        if (endTimeOfDay.isAfter(scheduleEndTime) && endTimeOfDay.isBefore(scheduleStartTime)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "End time is set outside of business hours of 8am - 10pm EST");
+            alert.showAndWait();
+            return;
+        }
 
         User user = UserCRUD.getUserByID(appointment.getUserID());
 

@@ -157,9 +157,9 @@ public class Appointments {
         try {
             // get appointment values
             int appointmentID = appointmentsTable.getSelectionModel().getSelectedItem().getAppointmentID();
-            String title = appointmentsTable.getSelectionModel().getSelectedItem().getTitle();
+            String type = appointmentsTable.getSelectionModel().getSelectedItem().getType();
             // confirm delete
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + title + "?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + appointmentID + " of type " + type +" ?");
             Optional<ButtonType> confirmation = alert.showAndWait();
             if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
                 AppointmentCRUD.deleteAppointment(appointmentID);

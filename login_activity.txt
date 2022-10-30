@@ -119,3 +119,15 @@ admin logged in on 2022-10-30T08:43:56.938194300
 admin logged in on 2022-10-30T10:33:27.408027
 admin logged in on 2022-10-30T10:55:39.157660400
 admin logged in on 2022-10-30T10:55:57.663734300
+kuk had a failed login attempt on 2022-10-30T10:59:15.230638900
+kuk had a failed login attempt on 2022-10-30T10:59:52.396672
+kuk had a failed login attempt on 2022-10-30T11:00:07.904947200
+non had a failed login attempt on 2022-10-30T11:01:06.926100200
+non had a failed login attempt on 2022-10-30T11:02:03.736845100
+non had a failed login attempt on 2022-10-30T11:03:06.623182500
+non had a failed login attempt on 2022-10-30T11:03:43.025555500
+non had a failed login attempt on 2022-10-30T11:04:15.349660500
+admin logged in on 2022-10-30T11:04:57.222176400
+admin logged in on 2022-10-30T11:12:12.759612400
+admin logged in on 2022-10-30T11:36:34.966909700
+admin logged in on 2022-10-30T11:46:12.920127300

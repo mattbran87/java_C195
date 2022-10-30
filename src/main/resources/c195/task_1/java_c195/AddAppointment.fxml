@@ -81,7 +81,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label text="Customer ID" GridPane.rowIndex="9">
+            <Label text="Customer Name" GridPane.rowIndex="9">
                 <font>
                   <Font name="System Bold" size="12.0" />
                </font>

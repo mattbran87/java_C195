@@ -3,6 +3,7 @@ package c195.task_1.java_c195.Controller;
 import c195.task_1.java_c195.DAO.ContactCRUD;
 import c195.task_1.java_c195.DAO.CustomerCRUD;
 import c195.task_1.java_c195.DAO.UserCRUD;
+import c195.task_1.java_c195.Model.Customer;
 import c195.task_1.java_c195.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,7 @@ public class AddAppointment {
     public void initialize() throws SQLException {
         // set id field on page load
         appointmentID.setText(String.valueOf(generateNewID()));
-        appointmentCustID.setItems(CustomerCRUD.getAllCustomerIDs());
+        appointmentCustID.setItems(CustomerCRUD.getAllCustomerNames());
         appointmentUID.setItems(UserCRUD.getAllUserIDs());
         appointmentCID.setItems(ContactCRUD.getAllContactIDs());
     }
@@ -146,7 +147,8 @@ public class AddAppointment {
             alert.showAndWait();
             return;
         } else {
-            custIDInput = Integer.parseInt(appointmentCustID.getValue().toString());
+            Customer customer = CustomerCRUD.getCustomerByName(appointmentCustID.getValue().toString());
+            custIDInput = customer.getCustomerID();
         }
 
         int uidInput = 0;

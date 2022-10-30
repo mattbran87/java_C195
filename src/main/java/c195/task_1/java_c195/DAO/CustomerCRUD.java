@@ -66,6 +66,20 @@ public class CustomerCRUD {
         return customersObservableList;
     }
 
+    public static ObservableList<String> getAllCustomerNames() throws SQLException {
+        ObservableList<String> customersObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT Customer_Name from customers";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            String name = rs.getString("Customer_Name");
+            customersObservableList.add(name);
+        }
+
+        return customersObservableList;
+    }
+
     /**
      * get customer from customers table that matches the Customer ID
      * @param id
@@ -74,6 +88,32 @@ public class CustomerCRUD {
      */
     public static Customer getCustomerByID(Integer id) throws SQLException {
         String sql = "SELECT * from customers WHERE Customer_ID = '" + id + "'";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        Customer customer = null;
+        while(rs.next()) {
+            Integer customerID = rs.getInt("Customer_ID");
+            String customerName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            String phone = rs.getString("Phone");
+            Integer divisionId = rs.getInt("Division_ID");
+
+            customer = new Customer(
+                    customerID,
+                    customerName,
+                    address,
+                    postalCode,
+                    phone,
+                    divisionId
+            );
+
+        }
+        return customer;
+    }
+
+    public static Customer getCustomerByName(String name) throws SQLException {
+        String sql = "SELECT * from customers WHERE Customer_Name = '" + name + "'";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         Customer customer = null;
