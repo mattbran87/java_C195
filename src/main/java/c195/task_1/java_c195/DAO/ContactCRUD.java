@@ -2,6 +2,7 @@ package c195.task_1.java_c195.DAO;
 
 import c195.task_1.java_c195.Model.Appointment;
 import c195.task_1.java_c195.Model.Contact;
+import c195.task_1.java_c195.Model.Customer;
 import c195.task_1.java_c195.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,5 +75,32 @@ public class ContactCRUD {
         }
 
         return contactsObservableList;
+    }
+
+    /**
+     * @description get contact by contact id
+     * @param ID
+     * @return
+     * @throws SQLException
+     */
+    public static Contact getContactByID(Integer ID) throws SQLException {
+        String sql = "SELECT * from contacts WHERE Contact_ID = '" + ID + "'";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        Contact contact = null;
+
+        while(rs.next()) {
+            Integer contactID = rs.getInt("Contact_ID");
+            String name = rs.getString("Contact_Name");
+            String email = rs.getString("Email");
+
+            contact = new Contact(
+                    contactID,
+                    name,
+                    email
+            );
+
+        }
+        return contact;
     }
 }

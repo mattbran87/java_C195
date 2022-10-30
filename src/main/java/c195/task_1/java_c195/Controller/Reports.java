@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Optional;
@@ -54,15 +55,28 @@ public class Reports {
         // add contact names to combobox
         ObservableList<String> contactNames = ContactCRUD.getAllContactNames();
         contactCombobox.setItems(contactNames);
-        // populate appointment month and type table
-        appointmentsTableYear.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, MonthTypeReport>("year"));
+        // populate Appointments By Type & Month
+        appointmentsTableYear.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, String>("year"));
         appointmentsTableMonth.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, String>("month"));
         appointmentsTableType.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, String>("type"));
         appointmentsTableAppts.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, Integer>("numberOfAppointments"));
         ObservableList<MonthTypeReport> appointmentsTypeMonth = appointmentsByTypeMonth();
         appointmentsTable.setItems(appointmentsTypeMonth);
+        // populate Hours Scheduled Per Contact
+        hoursScheduledContactID.setCellValueFactory(new PropertyValueFactory<HoursReport, Integer>("contactID"));
+        hoursScheduledName.setCellValueFactory(new PropertyValueFactory<HoursReport, String>("contactName"));
+        hoursScheduledHours.setCellValueFactory(new PropertyValueFactory<HoursReport, String>("hoursScheduled"));
+        hoursScheduledHoursYTD.setCellValueFactory(new PropertyValueFactory<HoursReport, Integer>("hoursWorked"));
+        ObservableList<HoursReport> hoursReports = scheduledHoursPerContact();
+        hoursScheduled.setItems(hoursReports);
     }
 
+    /**
+     * @description get all appointments and builds an ObservableArrayList of MonthTypeReport objects and returns it to
+     * be displayed in the Appointments By Type & Month report
+     * @return monthTypeReports
+     * @throws SQLException
+     */
     public static ObservableList<MonthTypeReport> appointmentsByTypeMonth() throws SQLException {
         ObservableList<MonthTypeReport> monthTypeReports = FXCollections.observableArrayList();
         ObservableList<Appointment> appointments = AppointmentCRUD.getAllAppointments();
@@ -125,6 +139,109 @@ public class Reports {
         return monthTypeReports;
     }
 
+    public static ObservableList<HoursReport> scheduledHoursPerContact() throws SQLException {
+        ObservableList<HoursReport> hoursReports = FXCollections.observableArrayList();
+        ObservableList<Appointment> appointments = AppointmentCRUD.getAllAppointments();
+        Hashtable<Integer, Hashtable<String, Float>> contactHours = new Hashtable<Integer, Hashtable<String, Float>>();
+
+        for (Appointment appointment : appointments) {
+            Integer contactID = appointment.getContactID();
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime start = appointment.getStart();
+            LocalDateTime end = appointment.getEnd();
+            long minutesDifference = ChronoUnit.MINUTES.between(start, end);
+            float hours = minutesDifference / 60;
+            boolean scheduled = false;
+            boolean worked = false;
+            Hashtable<String, Float> hoursTable = new Hashtable<String, Float>();
+
+            if (start.isAfter(now)) {
+                scheduled = true;
+            } else {
+                worked = true;
+            }
+
+            if (contactHours.containsKey(contactID)) {
+                // check if type key hoursWorked and hoursScheduled keys exist
+                if (contactHours.get(contactID).containsKey("hoursWorked") && contactHours.get(contactID).containsKey("hoursScheduled")) {
+                    if (worked) {
+                        float hoursWorked = contactHours.get(contactID).get("hoursWorked");
+                        float hoursScheduled = contactHours.get(contactID).get("hoursScheduled");
+                        hoursTable.put("hoursWorked", hoursWorked + hours);
+                        hoursTable.put("hoursScheduled", hoursScheduled);
+                    }
+                    if (scheduled) {
+                        float hoursWorked = contactHours.get(contactID).get("hoursWorked");
+                        float hoursScheduled = contactHours.get(contactID).get("hoursScheduled");
+                        hoursTable.put("hoursWorked", hoursWorked);
+                        hoursTable.put("hoursScheduled", hoursScheduled + hours);
+                    }
+                    contactHours.put(contactID, hoursTable);
+                } else {
+                    // else create new typeTable entry and push to contactHours
+                    Hashtable<String, Float> currentTable = contactHours.get(contactID);
+                    if (currentTable != null) {
+                        hoursTable.putAll(currentTable);
+                    }
+                    if (worked) {
+                        hoursTable.put("hoursWorked", hours);
+                        hoursTable.put("hoursScheduled", 0f);
+                    }
+                    if (scheduled) {
+                        hoursTable.put("hoursWorked", 0f);
+                        hoursTable.put("hoursScheduled", hours);
+                    }
+                    contactHours.put(contactID, hoursTable);
+                }
+            } else {
+                // else create new hoursTable entry and push to contactHours
+                if (worked) {
+                    hoursTable.put("hoursWorked", hours);
+                    hoursTable.put("hoursScheduled", 0f);
+                }
+                if (scheduled) {
+                    hoursTable.put("hoursWorked", 0f);
+                    hoursTable.put("hoursScheduled", hours);
+                }
+                contactHours.put(contactID, hoursTable);
+            }
+        }
+
+        String snop = "snop";
+
+        for (Map.Entry<Integer, Hashtable<String, Float>> contactHoursData : contactHours.entrySet()) {
+            Integer contactId = contactHoursData.getKey();
+            Contact contact = ContactCRUD.getContactByID(contactId);
+            String contactName = contact.getName();
+            float hoursWorkedValue = 0f;
+            float hoursScheduledValue = 0f;
+            Map<String, Float> hoursWorkedScheduled = contactHoursData.getValue();
+
+            // Iterate hoursWorkedScheduled
+            for (Map.Entry<String, Float> type : hoursWorkedScheduled.entrySet()) {
+                String typeKey = type.getKey();
+                float total = type.getValue();
+
+                if (typeKey == "hoursWorked") {
+                    hoursWorkedValue = total;
+                }
+
+                if (typeKey == "hoursScheduled") {
+                    hoursScheduledValue = total;
+                }
+            }
+
+            HoursReport hoursReport = new HoursReport(
+                    contactId,
+                    contactName,
+                    hoursWorkedValue,
+                    hoursScheduledValue
+            );
+            hoursReports.add(hoursReport);
+        }
+
+        return hoursReports;
+    }
 
     public void apptByTypeSelected(Event event) {
 
@@ -136,6 +253,23 @@ public class Reports {
 
     public void hrsPerUsersSelected(Event event) {
 
+    }
+
+    /**
+     * @description when user selects a contact from the combobox the function updates the contactSchedule table with records
+     * matching the selected name
+     * @param actionEvent
+     */
+    public void contactComboboxClicked(ActionEvent actionEvent) {
+
+//        contactScheduleApptID.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("appointmentID"));
+//        contactScheduleTitle.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("title"));
+//        contactScheduleType.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("type"));
+//        contactScheduleDesc.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("description"));
+//        contactScheduleStart.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("start"));
+//        contactScheduleEnd.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("end"));
+//        contactScheduleCustID.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("customerID"));
+//        contactSchedule.setItems();
     }
 
     /**
@@ -176,9 +310,5 @@ public class Reports {
         if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
             System.exit(0);
         }
-    }
-
-    public void contactComboboxClicked(ActionEvent actionEvent) {
-
     }
 }

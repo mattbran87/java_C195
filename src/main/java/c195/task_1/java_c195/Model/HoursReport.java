@@ -3,10 +3,10 @@ package c195.task_1.java_c195.Model;
 public class HoursReport {
     private Integer contactID;
     private String contactName;
-    private Integer hoursScheduled;
-    private Integer hoursWorked;
+    private float hoursScheduled;
+    private float hoursWorked;
 
-    public HoursReport(Integer contactID, String contactName, Integer hoursScheduled, Integer hoursWorked) {
+    public HoursReport(Integer contactID, String contactName, float hoursScheduled, float hoursWorked) {
         this.contactID = contactID;
         this.contactName = contactName;
         this.hoursScheduled = hoursScheduled;
@@ -29,19 +29,19 @@ public class HoursReport {
         this.contactName = contactName;
     }
 
-    public Integer getHoursScheduled() {
+    public float getHoursScheduled() {
         return hoursScheduled;
     }
 
-    public void setHoursScheduled(Integer hoursScheduled) {
+    public void setHoursScheduled(float hoursScheduled) {
         this.hoursScheduled = hoursScheduled;
     }
 
-    public Integer getHoursWorked() {
+    public float getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(Integer hoursWorked) {
+    public void setHoursWorked(float hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 }
