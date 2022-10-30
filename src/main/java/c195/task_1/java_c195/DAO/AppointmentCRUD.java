@@ -144,6 +144,49 @@ public class AppointmentCRUD {
     }
 
     /**
+     * @description get all appointments in the appointments table that match the contact id
+     * @param ID
+     * @return appointmentsObservableList
+     * @throws SQLException
+     */
+    public static ObservableList<Appointment> getAllAppointmentsByContactID(Integer ID) throws SQLException {
+        ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * from appointments WHERE Contact_ID=?";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+
+        ps.setInt(1, ID);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            int id = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            int customerID = rs.getInt("Customer_ID");
+            int userID = rs.getInt("User_ID");
+            int contactID = rs.getInt("Contact_ID");
+            Appointment appointment = new Appointment(
+                    id,
+                    title,
+                    description,
+                    location,
+                    type,
+                    start,
+                    end,
+                    customerID,
+                    userID,
+                    contactID
+            );
+            appointmentsObservableList.add(appointment);
+        }
+
+        return appointmentsObservableList;
+    }
+
+    /**
      * @description generate a new id for an appointment
      * @return maxID
      * @throws SQLException

@@ -37,7 +37,7 @@ public class Reports {
     public TableColumn appointmentsTableType;
     public TableColumn appointmentsTableAppts;
     public ComboBox contactCombobox;
-    public TableView<ScheduleReport> contactSchedule;
+    public TableView<Appointment> contactSchedule;
     public TableColumn contactScheduleApptID;
     public TableColumn contactScheduleTitle;
     public TableColumn contactScheduleType;
@@ -139,6 +139,12 @@ public class Reports {
         return monthTypeReports;
     }
 
+    /**
+     * description get all appointments and builds an ObservableArrayList of HoursReport objects and returns it to
+     * be displayed in the Hours Scheduled Per Contact report
+     * @return hoursReports
+     * @throws SQLException
+     */
     public static ObservableList<HoursReport> scheduledHoursPerContact() throws SQLException {
         ObservableList<HoursReport> hoursReports = FXCollections.observableArrayList();
         ObservableList<Appointment> appointments = AppointmentCRUD.getAllAppointments();
@@ -207,8 +213,6 @@ public class Reports {
             }
         }
 
-        String snop = "snop";
-
         for (Map.Entry<Integer, Hashtable<String, Float>> contactHoursData : contactHours.entrySet()) {
             Integer contactId = contactHoursData.getKey();
             Contact contact = ContactCRUD.getContactByID(contactId);
@@ -217,7 +221,6 @@ public class Reports {
             float hoursScheduledValue = 0f;
             Map<String, Float> hoursWorkedScheduled = contactHoursData.getValue();
 
-            // Iterate hoursWorkedScheduled
             for (Map.Entry<String, Float> type : hoursWorkedScheduled.entrySet()) {
                 String typeKey = type.getKey();
                 float total = type.getValue();
@@ -243,33 +246,23 @@ public class Reports {
         return hoursReports;
     }
 
-    public void apptByTypeSelected(Event event) {
-
-    }
-
-    public void contactSchedSelected(Event event) {
-
-    }
-
-    public void hrsPerUsersSelected(Event event) {
-
-    }
-
     /**
      * @description when user selects a contact from the combobox the function updates the contactSchedule table with records
      * matching the selected name
      * @param actionEvent
      */
-    public void contactComboboxClicked(ActionEvent actionEvent) {
-
-//        contactScheduleApptID.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("appointmentID"));
-//        contactScheduleTitle.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("title"));
-//        contactScheduleType.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("type"));
-//        contactScheduleDesc.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("description"));
-//        contactScheduleStart.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("start"));
-//        contactScheduleEnd.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("end"));
-//        contactScheduleCustID.setCellValueFactory(new PropertyValueFactory<ScheduleReport, Integer>("customerID"));
-//        contactSchedule.setItems();
+    public void contactComboboxClicked(ActionEvent actionEvent) throws SQLException {
+        String contactName = contactCombobox.getValue().toString();
+        Contact contact = ContactCRUD.getContactByName(contactName);
+        ObservableList<Appointment> appointments = AppointmentCRUD.getAllAppointmentsByContactID(contact.contactID);
+        contactScheduleApptID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
+        contactScheduleTitle.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("title"));
+        contactScheduleType.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("type"));
+        contactScheduleDesc.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("description"));
+        contactScheduleStart.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("start"));
+        contactScheduleEnd.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("end"));
+        contactScheduleCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
+        contactSchedule.setItems(appointments);
     }
 
     /**

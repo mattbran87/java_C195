@@ -60,7 +60,7 @@ public class ContactCRUD {
 
     /**
      * @description get all contact names in contacts
-     * @return
+     * @return contactsObservableList
      * @throws SQLException
      */
     public static ObservableList<String> getAllContactNames() throws SQLException {
@@ -80,11 +80,38 @@ public class ContactCRUD {
     /**
      * @description get contact by contact id
      * @param ID
-     * @return
+     * @return contact
      * @throws SQLException
      */
     public static Contact getContactByID(Integer ID) throws SQLException {
         String sql = "SELECT * from contacts WHERE Contact_ID = '" + ID + "'";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        Contact contact = null;
+
+        while(rs.next()) {
+            Integer contactID = rs.getInt("Contact_ID");
+            String name = rs.getString("Contact_Name");
+            String email = rs.getString("Email");
+
+            contact = new Contact(
+                    contactID,
+                    name,
+                    email
+            );
+
+        }
+        return contact;
+    }
+
+    /**
+     * @description get contact by contact name
+     * @param contactName
+     * @return contact
+     * @throws SQLException
+     */
+    public static Contact getContactByName(String contactName) throws SQLException {
+        String sql = "SELECT * from contacts WHERE Contact_Name = '" + contactName + "'";
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         Contact contact = null;

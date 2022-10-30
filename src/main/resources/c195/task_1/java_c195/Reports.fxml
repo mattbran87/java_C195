@@ -21,7 +21,7 @@
       </HBox>
       <TabPane layoutX="12.0" layoutY="50.0" prefHeight="275.0" prefWidth="577.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="apptByType" onSelectionChanged="#apptByTypeSelected" text="Appointments By Type &amp; Month">
+          <Tab fx:id="apptByType" text="Appointments By Type &amp; Month">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -36,7 +36,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="contactSched" onSelectionChanged="#contactSchedSelected" text="Contact Schedule">
+          <Tab fx:id="contactSched" text="Contact Schedule">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -48,8 +48,8 @@
                         <ComboBox fx:id="contactCombobox" onAction="#contactComboboxClicked" prefWidth="150.0" AnchorPane.topAnchor="10.0" />
                         <TableView fx:id="contactSchedule" layoutX="-3.0" layoutY="44.0" prefHeight="202.0" prefWidth="583.0">
                           <columns>
-                            <TableColumn fx:id="contactScheduleApptID" prefWidth="100.0" text="Appointment ID" />
-                            <TableColumn fx:id="contactScheduleTitle" prefWidth="50.0" text="Title" />
+                            <TableColumn fx:id="contactScheduleApptID" prefWidth="75.0" text="Appointment ID" />
+                            <TableColumn fx:id="contactScheduleTitle" prefWidth="75.0" text="Title" />
                               <TableColumn fx:id="contactScheduleType" prefWidth="75.0" text="Type" />
                               <TableColumn fx:id="contactScheduleDesc" prefWidth="75.0" text="Description" />
                               <TableColumn fx:id="contactScheduleStart" prefWidth="75.0" text="Start" />
@@ -60,7 +60,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="hrsPerUsers" onSelectionChanged="#hrsPerUsersSelected" text="Hours Scheduled Per Contact">
+            <Tab fx:id="hrsPerUsers" text="Hours Scheduled Per Contact">
                 <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
