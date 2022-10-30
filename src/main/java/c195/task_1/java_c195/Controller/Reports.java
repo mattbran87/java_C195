@@ -76,7 +76,7 @@ public class Reports {
 
     /**
      * get all appointments and builds an ObservableArrayList of MonthTypeReport objects and returns it to
-     * be displayed in the Appointments By Type & Month report
+     * be displayed in the Appointments By Type And Month report
      * @return monthTypeReports
      * @throws SQLException
      */

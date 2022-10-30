@@ -22,6 +22,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class MainController implements Initializable {
     public Button exitButton;
 
     /**
-     * @description When page is initially loaded translate input labels. Defaults to US English. Function uses lambda
+     * When page is initially loaded translate input labels. Defaults to US English. Function uses lambda
      * expression to assign the System.exit() function to the exit button.
      * @param url URL of the current page
      * @param rb gets the language resource bundle
@@ -83,7 +84,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * @description When login button is clicked the user is logged into the system unless incorrect username and password is given
+     * When login button is clicked the user is logged into the system unless incorrect username and password is given
      * @param mouseEvent click on the login button
      * @throws IOException
      * @throws SQLException
@@ -111,9 +112,10 @@ public class MainController implements Initializable {
             ObservableList<Appointment> getAllAppointments = AppointmentCRUD.getAllAppointments();
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime nowPlus15 = LocalDateTime.now().plusMinutes(15);
+            LocalDateTime nowMinus15 = LocalDateTime.now().minusMinutes(15);
             LocalDateTime startTime;
             String getAppointmentTitle = "";
-            LocalDateTime displayTime = null;
+            LocalDateTime upcomingAppointmentTime = null;
             boolean hasAppointments = false;
 
             outputFile.print(usernameInput + " logged in on " + LocalDateTime.now() + "\n");
@@ -131,14 +133,15 @@ public class MainController implements Initializable {
             for (Appointment appointment : getAllAppointments) {
                 startTime = appointment.getStart();
 
-                if (startTime.isEqual(now) ||
-                    startTime.isAfter(now) && startTime.isBefore(nowPlus15)) {
+                // check if appointment is scheduled within 15 minutes before or after login time
+                if (startTime.isAfter(nowMinus15) && startTime.isBefore(nowPlus15)) {
                     getAppointmentTitle = appointment.getTitle();
-                    displayTime = startTime;
+                    upcomingAppointmentTime = startTime;
                     hasAppointments = true;
                 }
             }
             if (hasAppointments) {
+                String displayTime = upcomingAppointmentTime.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm"));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment " + getAppointmentTitle + " is starting at" + displayTime + ".");
                 Optional<ButtonType> confirmation = alert.showAndWait();
                 System.out.println("15 Minute Reminder");
