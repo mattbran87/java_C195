@@ -46,7 +46,6 @@ public class Appointments {
     public Button reportsButton;
     public Button exitButton;
 
-
     public void initialize() throws SQLException {
         // get all appointments
         ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();
@@ -65,12 +64,22 @@ public class Appointments {
         appointmentsTable.setItems(allAppointments);
     }
 
+    /**
+     * @description filter table view and show all appointments
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void radioNoneClicked(ActionEvent actionEvent) throws SQLException {
         // get all appointments
         ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();
         appointmentsTable.setItems(allAppointments);
     }
 
+    /**
+     * @description filter table view and show only appointments that are going scheduled within the next 7-day period
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void radioWeekClicked(ActionEvent actionEvent) throws SQLException {
         // get all appointments
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -81,6 +90,11 @@ public class Appointments {
         appointmentsTable.setItems(allAppointments);
     }
 
+    /**
+     * @description filter table view and show only appointments that are going scheduled within the next 1-month period
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void radioMonthClicked(ActionEvent actionEvent) throws SQLException {
         // get all appointments
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -91,6 +105,11 @@ public class Appointments {
         appointmentsTable.setItems(allAppointments);
     }
 
+    /**
+     * @description go to AddAppointment view to add a new appointment record
+     * @param actionEvent
+     * @throws IOException
+     */
     public void createButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("AddAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -100,6 +119,12 @@ public class Appointments {
         stage.show();
     }
 
+    /**
+     * @description go to UpdateAppointment view with the selected appointment record data loaded in view inputs
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void updateButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
 
@@ -120,6 +145,10 @@ public class Appointments {
         stage.show();
     }
 
+    /**
+     * @description delete selected appointment from appointments table
+     * @param actionEvent
+     */
     public void deleteButtonClicked(ActionEvent actionEvent) {
         try {
             // get appointment values
@@ -139,6 +168,11 @@ public class Appointments {
         }
     }
 
+    /**
+     * @description go to customers view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void customersButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -148,6 +182,11 @@ public class Appointments {
         stage.show();
     }
 
+    /**
+     * @description go to reports view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void reportsButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Reports.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -157,6 +196,10 @@ public class Appointments {
         stage.show();
     }
 
+    /**
+     * @description exit program
+     * @param actionEvent
+     */
     public void exitButtonClicked(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Would you like to exit the program?");
         Optional<ButtonType> confirmation = alert.showAndWait();

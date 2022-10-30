@@ -57,6 +57,12 @@ public class Customers {
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("phoneNumber"));
         customerTable.setItems(allCustomers);
     }
+
+    /**
+     * @description go to AddCustomer view to add a new customer record
+     * @param actionEvent
+     * @throws IOException
+     */
     public void createButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("AddCustomer.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -66,6 +72,12 @@ public class Customers {
         stage.show();
     }
 
+    /**
+     * @description go to UpdateCustomer view with the selected customer record data loaded in view inputs
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void updateButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
@@ -86,6 +98,10 @@ public class Customers {
         stage.show();
     }
 
+    /**
+     * @description delete selected customer from customers table
+     * @param actionEvent
+     */
     public void deleteButtonClicked(ActionEvent actionEvent) {
         try {
             int customerID = customerTable.getSelectionModel().getSelectedItem().getCustomerID();
@@ -113,6 +129,11 @@ public class Customers {
         }
     }
 
+    /**
+     * @description go to appointments view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void apptButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -122,6 +143,11 @@ public class Customers {
         stage.show();
     }
 
+    /**
+     * @description go to reports view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void reportsButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Reports.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -130,7 +156,10 @@ public class Customers {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * @description exit program
+     * @param actionEvent
+     */
     public void exitButtonClicked(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Would you like to exit the program?");
         Optional<ButtonType> confirmation = alert.showAndWait();

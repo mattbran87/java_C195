@@ -38,6 +38,12 @@ public class UpdateCustomer {
     public TextField phoneNumber;
     public Customer customer;
 
+    /**
+     * @description load the selected customer user selected from the previous view's table. Load the record data into
+     * the matching inputs.
+     * @param selectedCustomer
+     * @throws SQLException
+     */
     public void passCustomerData(Customer selectedCustomer) throws SQLException {
         customerID.setText(Integer.toString(selectedCustomer.getCustomerID()));
 
@@ -58,6 +64,13 @@ public class UpdateCustomer {
         customer = selectedCustomer;
     }
 
+    /**
+     * @description update existing customer in the database. all inputs are validated for null values. If all inputs are not
+     * empty then customer record is updated and user forwarded to customers view.
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         int idInput = Integer.parseInt(customerID.getText());
 
@@ -143,6 +156,11 @@ public class UpdateCustomer {
         }
     }
 
+    /**
+     * @description user is forwarded back to customers view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -152,6 +170,11 @@ public class UpdateCustomer {
         stage.show();
     }
 
+    /**
+     * @description when user selects a new division update the country id combobox with related countries
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onSelectionChanged(ActionEvent actionEvent) throws SQLException {
         if (country.getValue() != null) {
             String countryValue = country.getValue().toString();

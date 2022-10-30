@@ -37,6 +37,11 @@ public class Reports {
 
     }
 
+    /**
+     * @description go to appointments view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void appointmentsButton(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -46,6 +51,11 @@ public class Reports {
         stage.show();
     }
 
+    /**
+     * @description go to customers view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void customersButton(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -55,6 +65,10 @@ public class Reports {
         stage.show();
     }
 
+    /**
+     * @description exit program
+     * @param actionEvent
+     */
     public void exitButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Would you like to exit the program?");
         Optional<ButtonType> confirmation = alert.showAndWait();

@@ -48,6 +48,14 @@ public class AddAppointment {
         appointmentCID.setItems(ContactCRUD.getAllContactIDs());
     }
 
+    /**
+     * @description save a new appointment to the database. all inputs are validated for null values and determines if
+     * the new appointment date and time falls within business hours. If outside of business hours new appointment is not valid. if
+     * new appointment passes validation the record is saved and user is forwarded back to appointments view.
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void saveEditAppointment(ActionEvent actionEvent) throws SQLException, IOException {
         int idInput = Integer.parseInt(appointmentID.getText());
 
@@ -224,6 +232,11 @@ public class AddAppointment {
         }
     }
 
+    /**
+     * @description user is forwarded back to appointments view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancelEditAppointment(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Appointments.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

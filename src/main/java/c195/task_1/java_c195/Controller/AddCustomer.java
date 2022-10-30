@@ -39,9 +39,15 @@ public class AddCustomer {
         // set id field on page load
         customerID.setText(String.valueOf(CustomerCRUD.generateNewID()));
         country.setItems(CountryCRUD.getAllCountryNames());
-//        division.setItems(FirstLevelDivisionCRUD.getAllFirstLevelDivisions());
     }
 
+    /**
+     * @description save a new customer to the database. all inputs are validated for null values. If all inputs are not
+     * empty then new customer record is saved and user forwarded to customers view.
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void saveBUttonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         int idInput = Integer.parseInt(customerID.getText());
 
@@ -127,6 +133,11 @@ public class AddCustomer {
         }
     }
 
+    /**
+     * @description user is forwarded back to customers view
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(MainApplication.class.getResource("Customers.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -136,6 +147,11 @@ public class AddCustomer {
         stage.show();
     }
 
+    /**
+     * @description when user selects a new division update the country id combobox with related countries
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onSelectionChange(ActionEvent actionEvent) throws SQLException {
         if (country.getValue() != null) {
             String countryValue = country.getValue().toString();
