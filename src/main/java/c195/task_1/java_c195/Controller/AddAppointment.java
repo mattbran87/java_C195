@@ -19,10 +19,7 @@ import c195.task_1.java_c195.Model.Appointment;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 import static c195.task_1.java_c195.DAO.AppointmentCRUD.*;
 import static c195.task_1.java_c195.helper.Helper.*;
@@ -186,8 +183,10 @@ public class AddAppointment {
         LocalTime startTimeOfDay = estStartDateTime.toLocalTime();
         LocalTime endTimeOfDay = estEndDateTime.toLocalTime();
 
-        LocalTime scheduleStartTime = LocalTime.of(8, 0, 0);
-        LocalTime scheduleEndTime = LocalTime.of(22, 0, 0);
+        ZonedDateTime dayOfCloseOfBusiness = ZonedDateTime.of(newEndDateTime.getYear(), newEndDateTime.getMonthValue(),
+                newEndDateTime.getDayOfMonth(), 22, 0, 0, 0, ZoneId.of("US/Eastern"));
+        ZonedDateTime dayAfterOpenBusiness = ZonedDateTime.of(newStartDateTime.getYear(), newStartDateTime.getMonthValue(),
+                newStartDateTime.getDayOfMonth()+1, 8, 0, 0, 0, ZoneId.of("US/Eastern"));
 
         ObservableList<Appointment> appointmentsOverlapObservableList =
                 AppointmentCRUD.getAppointmentsByDateRange(convertLocalDateTimeToUTC(newStartDateTime), convertLocalDateTimeToUTC(newEndDateTime));
@@ -222,13 +221,13 @@ public class AddAppointment {
             return;
         }
 
-        if (startTimeOfDay.isAfter(scheduleEndTime) && startTimeOfDay.isBefore(scheduleStartTime)) {
+        if (estStartDateTime.isAfter(dayOfCloseOfBusiness) && estStartDateTime.isBefore(dayAfterOpenBusiness)) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Start time is set outside of business hours of 8am - 10pm EST");
             alert.showAndWait();
             return;
         }
 
-        if (endTimeOfDay.isAfter(scheduleEndTime) && endTimeOfDay.isBefore(scheduleStartTime)) {
+        if (estEndDateTime.isAfter(dayOfCloseOfBusiness) && estEndDateTime.isBefore(dayAfterOpenBusiness)) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "End time is set outside of business hours of 8am - 10pm EST");
             alert.showAndWait();
             return;

@@ -27,7 +27,7 @@ public class Helper {
      */
     public static ZonedDateTime convertLocalDateTimeToEST(LocalDateTime dateValue) {
         ZonedDateTime zonedDateTime = dateValue.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
-        ZonedDateTime dateTimeUTC = zonedDateTime.withZoneSameInstant(ZoneId.of("SystemV/EST5EDT"));
+        ZonedDateTime dateTimeUTC = zonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
 
         return dateTimeUTC;
     }
