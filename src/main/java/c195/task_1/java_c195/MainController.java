@@ -22,6 +22,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -63,6 +64,7 @@ public class MainController implements Initializable {
             // get location
             Locale locale = Locale.getDefault();
             Locale.setDefault(locale);
+            ZoneId zone = ZoneId.systemDefault();
 //            Locale.setDefault(new Locale("fr", "FR"));
 
             // get resource bundle and add stored language values
@@ -71,7 +73,7 @@ public class MainController implements Initializable {
             usernameLabel.setText(rb.getString("usernameLabel"));
             passwordLabel.setText(rb.getString("passwordLabel"));
             locationLabel.setText(rb.getString("locationLabel"));
-            locationValue.setText(locale.getCountry());
+            locationValue.setText(zone.toString());
             loginButton.setText(rb.getString("loginButton"));
             exitButton.setText(rb.getString("exitButton"));
 
