@@ -9,6 +9,7 @@ import c195.task_1.java_c195.Model.Appointment;
 import c195.task_1.java_c195.Model.Country;
 import c195.task_1.java_c195.Model.Customer;
 import c195.task_1.java_c195.Model.FirstLevelDivision;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,9 @@ public class Customers {
     public Button customerDelete;
     public Button apptButton;
     public Button reportsButton;
+    public TextField customerSearchInput;
+    public ComboBox customerSearchCombobox;
+    public Button customerSearchButton;
     public Button exitButton;
 
     /**
@@ -61,6 +65,11 @@ public class Customers {
         customerTableCtry.setCellValueFactory(new PropertyValueFactory<Customer, String>("country"));
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("phoneNumber"));
         customerTable.setItems(allCustomers);
+
+        ObservableList<String> columnSearchList = FXCollections.observableArrayList();
+        columnSearchList.addAll("Customer_ID", "Customer_Name", "Address", "Postal_Code", "Phone");
+
+        customerSearchCombobox.setItems(columnSearchList);
     }
 
     /**
@@ -177,5 +186,59 @@ public class Customers {
         if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
             System.exit(0);
         }
+    }
+
+    public void clickSearchButton(ActionEvent actionEvent) throws SQLException {
+        String inputValue = "";
+        String comboValue = "";
+
+        if (customerSearchInput.getText() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Search Value input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            inputValue = customerSearchInput.getText();
+        }
+
+        if (customerSearchCombobox.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Search Column input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            comboValue = customerSearchCombobox.getValue().toString();
+        }
+
+        ObservableList<Customer> allCustomers = CustomerCRUD.getAllCustomersBySearchField(inputValue, comboValue);
+        // correct fields for table
+        for (Customer customer : allCustomers) {
+            FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionID(customer.getDivisionID());
+            Country country = CountryCRUD.getCountryByID(firstLevelDivision.getCountryID());
+
+            customer.setCountry(country.getCountryName());
+            customer.setDivision(firstLevelDivision.getDivisionName());
+        }
+        // set columns
+        customerTable.setItems(allCustomers);
+
+        if (allCustomers.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No results found.");
+            alert.showAndWait();
+        }
+    }
+
+    public void resetSearchResults(ActionEvent actionEvent) throws SQLException {
+        ObservableList<Customer> allCustomers = CustomerCRUD.getAllCustomers();
+        for (Customer customer : allCustomers) {
+            FirstLevelDivision firstLevelDivision = FirstLevelDivisionCRUD.getFirstLevelDivisionByDivisionID(customer.getDivisionID());
+            Country country = CountryCRUD.getCountryByID(firstLevelDivision.getCountryID());
+
+            customer.setCountry(country.getCountryName());
+            customer.setDivision(firstLevelDivision.getDivisionName());
+        }
+
+        customerSearchInput.setText("");
+        customerSearchCombobox.setValue("");
+
+        customerTable.setItems(allCustomers);
     }
 }

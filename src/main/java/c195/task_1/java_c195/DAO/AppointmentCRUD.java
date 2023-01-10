@@ -1,6 +1,7 @@
 package c195.task_1.java_c195.DAO;
 
 
+import c195.task_1.java_c195.Model.Customer;
 import c195.task_1.java_c195.Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -155,6 +156,48 @@ public class AppointmentCRUD {
         PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
 
         ps.setInt(1, ID);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            int id = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            int customerID = rs.getInt("Customer_ID");
+            int userID = rs.getInt("User_ID");
+            int contactID = rs.getInt("Contact_ID");
+            Appointment appointment = new Appointment(
+                    id,
+                    title,
+                    description,
+                    location,
+                    type,
+                    start,
+                    end,
+                    customerID,
+                    userID,
+                    contactID
+            );
+            appointmentsObservableList.add(appointment);
+        }
+
+        return appointmentsObservableList;
+    }
+
+    /**
+     * get appointments in the appointments table that match the search value and column
+     * @param searchValue
+     * @param searchColumn
+     * @return
+     * @throws SQLException
+     */
+    public static ObservableList<Appointment> getAllAppointmentsBySearchField(String searchValue, String searchColumn) throws SQLException {
+        ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * from appointments WHERE "+ searchColumn + "='" + searchValue + "'";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()) {

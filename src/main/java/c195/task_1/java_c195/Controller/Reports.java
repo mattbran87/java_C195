@@ -1,5 +1,6 @@
 package c195.task_1.java_c195.Controller;
 
+import c195.task_1.java_c195.DAO.CustomerCRUD;
 import c195.task_1.java_c195.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,6 +50,15 @@ public class Reports {
     public TableColumn hoursScheduledName;
     public TableColumn hoursScheduledHours;
     public TableColumn hoursScheduledHoursYTD;
+    public ComboBox clientCombobox;
+    public TableView<Appointment> clientSchedule;
+    public TableColumn clientScheduleApptID;
+    public TableColumn clientScheduleTitle;
+    public TableColumn clientScheduleType;
+    public TableColumn clientScheduleDesc;
+    public TableColumn clientScheduleStart;
+    public TableColumn clientScheduleEnd;
+    public TableColumn clientScheduleCustID;
 
     /**
      * on view initialization combobox and tables are populated with data
@@ -58,6 +68,9 @@ public class Reports {
         // add contact names to combobox
         ObservableList<String> contactNames = ContactCRUD.getAllContactNames();
         contactCombobox.setItems(contactNames);
+        // add customer names to combobox
+        ObservableList<String> customerNames = CustomerCRUD.getAllCustomerNames();
+        clientCombobox.setItems(customerNames);
         // populate Appointments By Type & Month
         appointmentsTableYear.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, String>("year"));
         appointmentsTableMonth.setCellValueFactory(new PropertyValueFactory<MonthTypeReport, String>("month"));
@@ -306,5 +319,19 @@ public class Reports {
         if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
             System.exit(0);
         }
+    }
+
+    public void clientComboboxClicked(ActionEvent actionEvent) throws SQLException {
+        String clientName = clientCombobox.getValue().toString();
+        Customer customer = CustomerCRUD.getCustomerByName(clientName);
+        ObservableList<Appointment> appointments = AppointmentCRUD.getAllCustomerAppointments(customer.getCustomerID());
+        clientScheduleApptID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
+        clientScheduleTitle.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("title"));
+        clientScheduleType.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("type"));
+        clientScheduleDesc.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("description"));
+        clientScheduleStart.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("start"));
+        clientScheduleEnd.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("end"));
+        clientScheduleCustID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
+        clientSchedule.setItems(appointments);
     }
 }

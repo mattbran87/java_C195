@@ -1,6 +1,7 @@
 package c195.task_1.java_c195.Controller;
 
 import c195.task_1.java_c195.MainApplication;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +44,9 @@ public class Appointments {
     public Button updateButton;
     public Button deleteButton;
     public Button customersButton;
+    public TextField appSearchInput;
+    public ComboBox appSearchCombobox;
+    public Button appSearchButton;
     public Button reportsButton;
     public Button exitButton;
 
@@ -66,6 +70,11 @@ public class Appointments {
         appointmentsTableCID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("contactID"));
         // set table values
         appointmentsTable.setItems(allAppointments);
+
+        ObservableList<String> columnSearchList = FXCollections.observableArrayList();
+        columnSearchList.addAll("Appointment_ID", "Title", "Type", "Location", "Customer_ID", "User_ID", "Contact_ID");
+
+        appSearchCombobox.setItems(columnSearchList);
     }
 
     /**
@@ -210,6 +219,46 @@ public class Appointments {
         if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
             System.exit(0);
         }
+    }
+
+    public void clickSearchButton(ActionEvent actionEvent) throws SQLException {
+        String inputValue = "";
+        String comboValue = "";
+
+        if (appSearchInput.getText() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Search Value input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            inputValue = appSearchInput.getText();
+        }
+
+        if (appSearchCombobox.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Search Column input is empty.");
+            alert.showAndWait();
+            return;
+        } else {
+            comboValue = appSearchCombobox.getValue().toString();
+        }
+
+        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointmentsBySearchField(inputValue, comboValue);
+        // set columns
+        appointmentsTable.setItems(allAppointments);
+
+        if (allAppointments.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No results found.");
+            alert.showAndWait();
+        }
+    }
+
+    public void resetSearchResults(ActionEvent actionEvent) throws SQLException {
+        // get all appointments
+        ObservableList<Appointment> allAppointments = AppointmentCRUD.getAllAppointments();
+        // reset search values
+        appSearchInput.setText("");
+        appSearchCombobox.setValue("");
+        // set table values
+        appointmentsTable.setItems(allAppointments);
     }
 }
 

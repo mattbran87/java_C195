@@ -75,6 +75,31 @@
                      </children></AnchorPane>
                 </content>
             </Tab>
+            <Tab fx:id="clientHistory" text="Client History">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Select A Client Name" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="10.0">
+                                <font>
+                                    <Font name="System Bold" size="12.0" />
+                                </font>
+                            </Label>
+                            <ComboBox fx:id="clientCombobox" onAction="#clientComboboxClicked" prefWidth="150.0" AnchorPane.topAnchor="10.0" />
+                            <TableView fx:id="clientSchedule" layoutX="-3.0" layoutY="44.0" prefHeight="202.0" prefWidth="583.0">
+                                <columns>
+                                    <TableColumn fx:id="clientScheduleApptID" prefWidth="75.0" text="Appointment ID" />
+                                    <TableColumn fx:id="clientScheduleTitle" prefWidth="75.0" text="Title" />
+                                    <TableColumn fx:id="clientScheduleType" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="clientScheduleDesc" prefWidth="75.0" text="Description" />
+                                    <TableColumn fx:id="clientScheduleStart" prefWidth="75.0" text="Start" />
+                                    <TableColumn fx:id="clientScheduleEnd" prefWidth="75.0" text="End" />
+                                    <TableColumn fx:id="clientScheduleCustID" prefWidth="75.0" text="Customer ID" />
+                                </columns>
+                            </TableView>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
         </tabs>
       </TabPane>
       <HBox prefHeight="50.0" prefWidth="390.0" AnchorPane.topAnchor="350.0">

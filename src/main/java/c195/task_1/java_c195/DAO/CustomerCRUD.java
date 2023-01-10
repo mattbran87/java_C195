@@ -139,6 +139,41 @@ public class CustomerCRUD {
     }
 
     /**
+     * get customers in the customers table that match the search value and column
+     * @param searchValue
+     * @param searchColumn
+     * @return
+     * @throws SQLException
+     */
+    public static ObservableList<Customer> getAllCustomersBySearchField(String searchValue, String searchColumn) throws SQLException {
+        ObservableList<Customer> customersObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * from customers WHERE " + searchColumn + "='" + searchValue + "'";
+        PreparedStatement ps = JDBC.openConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            Integer customerID = rs.getInt("Customer_ID");
+            String customerName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            String phone = rs.getString("Phone");
+            Integer divisionId = rs.getInt("Division_ID");
+
+            Customer customer = new Customer(
+                    customerID,
+                    customerName,
+                    address,
+                    postalCode,
+                    phone,
+                    divisionId
+            );
+
+            customersObservableList.add(customer);
+        }
+        return customersObservableList;
+    }
+
+    /**
      * generate new customer ID
      * @return maxID
      * @throws SQLException
